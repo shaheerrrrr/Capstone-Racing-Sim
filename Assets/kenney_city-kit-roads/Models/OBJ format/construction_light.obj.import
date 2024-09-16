@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ct8kaue8d75tk"
+path="res://.godot/imported/construction_light.obj-8fced650d30cadb8764bd439000c2b96.mesh"
+
+[deps]
+
+files=["res://.godot/imported/construction_light.obj-8fced650d30cadb8764bd439000c2b96.mesh"]
+
+source_file="res://Assets/kenney_city-kit-roads/Models/OBJ format/construction_light.obj"
+dest_files=["res://.godot/imported/construction_light.obj-8fced650d30cadb8764bd439000c2b96.mesh", "res://.godot/imported/construction_light.obj-8fced650d30cadb8764bd439000c2b96.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dwk00vryx78rp"
+path="res://.godot/imported/construction_pylon.obj-4efe71fa9294f8127302f99311f2d991.mesh"
+
+[deps]
+
+files=["res://.godot/imported/construction_pylon.obj-4efe71fa9294f8127302f99311f2d991.mesh"]
+
+source_file="res://Assets/kenney_city-kit-roads/Models/OBJ format/construction_pylon.obj"
+dest_files=["res://.godot/imported/construction_pylon.obj-4efe71fa9294f8127302f99311f2d991.mesh", "res://.godot/imported/construction_pylon.obj-4efe71fa9294f8127302f99311f2d991.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

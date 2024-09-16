@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://c4pvmybmnv5jt"]
+
+[ext_resource type="Texture2D" uid="uid://bx21adk0yfadx" path="res://grass03.png" id="1_tk44s"]
+[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_jedh8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4tqem"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_4kceb"]
+sky_material = SubResource("ProceduralSkyMaterial_4tqem")
+
+[sub_resource type="Environment" id="Environment_w2xy4"]
+background_mode = 2
+sky = SubResource("Sky_4kceb")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn4ib"]
+albedo_texture = ExtResource("1_tk44s")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xvjnv"]
+size = Vector2(100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_14ifq"]
+data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[sub_resource type="PrismMesh" id="PrismMesh_gkqro"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ca5pj"]
+points = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w2xy4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_pn4ib")
+mesh = SubResource("PlaneMesh_xvjnv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_14ifq")
+
+[node name="Player" parent="." instance=ExtResource("2_jedh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09871, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.60779, 2.77315, -8.74228e-07, 2.77315, -9.60779, 0, -8.3994e-07, -2.42436e-07, -10, 17.4339, -3.33278, -9.66077)
+mesh = SubResource("PrismMesh_gkqro")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ca5pj")
