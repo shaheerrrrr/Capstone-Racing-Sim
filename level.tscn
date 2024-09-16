@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4pvmybmnv5jt"]
+[gd_scene load_steps=11 format=3 uid="uid://c4pvmybmnv5jt"]
 
 [ext_resource type="Texture2D" uid="uid://bx21adk0yfadx" path="res://grass03.png" id="1_tk44s"]
 [ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_jedh8"]
-[ext_resource type="PackedScene" uid="uid://c231qq3o5fsec" path="res://tile_slant.tscn" id="3_uwktj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4tqem"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,10 +20,16 @@ glow_enabled = true
 albedo_texture = ExtResource("1_tk44s")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lxwfb"]
-size = Vector2(100, 100)
+size = Vector2(1000, 1000)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x52h3"]
-points = PackedVector3Array(-50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_224li"]
+points = PackedVector3Array(-500, 0, -500, -500, 0, 500, 500, 0, -500, 500, 0, 500)
+
+[sub_resource type="PrismMesh" id="PrismMesh_sak8t"]
+size = Vector3(10, 20, 8)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q1adx"]
+data = PackedVector3Array(0, 10, 4, 5, -10, 4, -5, -10, 4, 0, 10, -4, -5, -10, -4, 5, -10, -4, 0, 10, 4, 0, 10, -4, 5, -10, 4, 0, 10, -4, 5, -10, -4, 5, -10, 4, 0, 10, -4, 0, 10, 4, -5, -10, -4, 0, 10, 4, -5, -10, 4, -5, -10, -4, -5, -10, 4, 5, -10, 4, -5, -10, -4, 5, -10, 4, 5, -10, -4, -5, -10, -4)
 
 [node name="Level" type="Node3D"]
 
@@ -36,7 +41,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_jedh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09871, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119242, 2.09871, -3.01659)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_550oi")
@@ -45,7 +50,13 @@ mesh = SubResource("PlaneMesh_lxwfb")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_x52h3")
+shape = SubResource("ConvexPolygonShape3D_224li")
 
-[node name="tile_slant2" parent="." instance=ExtResource("3_uwktj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80747, 1.06577, 4.37213)
+[node name="Ramp" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 15.7526, 0.0432631, -5.9187)
+mesh = SubResource("PrismMesh_sak8t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ramp"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_q1adx")

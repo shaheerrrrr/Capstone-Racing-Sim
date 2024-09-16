@@ -1,4 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://c231qq3o5fsec"]
+[gd_scene load_steps=7 format=4 uid="uid://c231qq3o5fsec"]
+
+[ext_resource type="Texture2D" uid="uid://bx21adk0yfadx" path="res://grass03.png" id="1_fa11x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_010a7"]
+albedo_texture = ExtResource("1_fa11x")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j1ik"]
 resource_name = "pavement"
@@ -37,16 +42,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jfwva")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1feqk"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ceetk"]
 points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0.27, -0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.27, 0.5, 0.5, 0.0199804, -0.5, 0.5, 0, 0.5, 0.5, 0.0199804, 0.5)
 
 [node name="tile_slant2" type="RigidBody3D"]
 
 [node name="tile_slant" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75)
+material_override = SubResource("StandardMaterial3D_010a7")
 mesh = SubResource("ArrayMesh_kl6nn")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75)
-shape = SubResource("ConvexPolygonShape3D_1feqk")
+[node name="StaticBody3D" type="StaticBody3D" parent="tile_slant"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile_slant/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ceetk")
