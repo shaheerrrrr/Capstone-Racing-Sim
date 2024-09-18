@@ -28,6 +28,8 @@ func _physics_process(delta: float) -> void:
 	#camera_3d.look_at(look_at)
 	#reverse_camera.look_at(look_at)
 	_check_camera_switch()
+	if Input.is_action_just_pressed("flip_vehicle"):
+		_flip_vehicle()
 	
 func _check_camera_switch():
 	if Input.is_action_just_pressed("perspective_change"):
@@ -36,5 +38,13 @@ func _check_camera_switch():
 		else:
 			camera_3d.current = true
 	
-	
-	
+func _flip_vehicle():
+	if is_upside_down():
+		var transform = global_transform
+		transform.origin.y += 1.5
+		transform.basis = Basis()
+		global_transform = transform
+
+func is_upside_down() -> bool:
+	var up_vector = global_transform.basis.y.normalized()
+	return up_vector.dot(Vector3(0, 1, 0)) < 0.0
