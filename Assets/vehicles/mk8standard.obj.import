@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dtelr0irgcjil"
+path="res://.godot/imported/mk8standard.obj-4ff2e952bd22f7c982192c809c4d081a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mk8standard.obj-4ff2e952bd22f7c982192c809c4d081a.mesh"]
+
+source_file="res://Assets/vehicles/mk8standard.obj"
+dest_files=["res://.godot/imported/mk8standard.obj-4ff2e952bd22f7c982192c809c4d081a.mesh", "res://.godot/imported/mk8standard.obj-4ff2e952bd22f7c982192c809c4d081a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

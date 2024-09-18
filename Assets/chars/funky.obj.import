@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cgr46puu3mh38"
+path="res://.godot/imported/funky.obj-debab0d83f859d077a57220db9bf488d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/funky.obj-debab0d83f859d077a57220db9bf488d.mesh"]
+
+source_file="res://Assets/chars/funky.obj"
+dest_files=["res://.godot/imported/funky.obj-debab0d83f859d077a57220db9bf488d.mesh", "res://.godot/imported/funky.obj-debab0d83f859d077a57220db9bf488d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

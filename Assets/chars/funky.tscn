@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw7o7ty75aixh"]
+
+[ext_resource type="ArrayMesh" uid="uid://cgr46puu3mh38" path="res://assets/chars/funky.obj" id="1_mvlog"]
+[ext_resource type="ArrayMesh" uid="uid://edvkvk6ddeya" path="res://assets/tracks/mariocircuit1.obj" id="2_yr6af"]
+[ext_resource type="ArrayMesh" uid="uid://dtelr0irgcjil" path="res://assets/vehicles/mk8standard.obj" id="3_efwjl"]
+[ext_resource type="Material" path=""G:\.shortcut-targets-by-id\1Hob6T_NIDKxpS-IvqzAhEo-T0bnwHc1K\1st Khan, Shaheer\Capstone Yearlong Project\assets\vehicles\mk8standard\bodyk_std_wlg_alb.png"" id="4_uxtg3"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Funky" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.812318, 0, 1.53495)
+mesh = ExtResource("1_mvlog")
+
+[node name="Mariocircuit1" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.82399, 0, 0, 0, 7.0814, 0, 0, 0, 10.1721, -6, 0, -6)
+mesh = ExtResource("2_yr6af")
+
+[node name="Mk8Standard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2685, 19.4687, -1.48181)
+mesh = ExtResource("3_efwjl")
+surface_material_override/0 = ExtResource("4_uxtg3")
