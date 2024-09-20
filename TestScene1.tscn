@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1pp36fqf63li"]
+
+[ext_resource type="PackedScene" uid="uid://b7utbcceih2l1" path="res://Wamp Wamp.tscn" id="1_o6ypu"]
+[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_rtiqu"]
+[ext_resource type="Script" path="res://speedometer.gd" id="3_nm7qt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4l2r"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_o1pwn"]
+sky_material = SubResource("ProceduralSkyMaterial_c4l2r")
+
+[sub_resource type="Environment" id="Environment_na5qw"]
+background_mode = 2
+sky = SubResource("Sky_o1pwn")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestScene1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_na5qw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_o6ypu")]
+transform = Transform3D(160, 0, 0, 0, 160, 0, 0, 0, 160, -1321.35, 0, -1253.17)
+
+[node name="Player" parent="." instance=ExtResource("2_rtiqu")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -136.098, 51.5149, 126.184)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_nm7qt")

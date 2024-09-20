@@ -3,7 +3,7 @@ extends VehicleBody3D
 const MAX_STEER = .8
 const ENGINE_POWER = 500
 var normal_friction_slip = 1.0
-var drift_friction_slip = 0.8
+var drift_friction_slip = 0.68
 var is_drifting = false
 
 @onready var camera_pivot = $CameraPivot
