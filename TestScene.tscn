@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bik5xvwjwnnpd"]
+[gd_scene load_steps=8 format=3 uid="uid://bqa7wv0l1tb"]
 
-[ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
+[ext_resource type="PackedScene" path="res://TestMap.tscn" id="2_gfnct"]
 [ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_laxwu"]
-[ext_resource type="PackedScene" uid="uid://cc0k1h663yaac" path="res://Tree.tscn" id="3_35kur"]
+[ext_resource type="PackedScene" path="res://Tree.tscn" id="3_35kur"]
 [ext_resource type="PackedScene" uid="uid://qq07d4l882yj" path="res://Assets/Bushes/bush.glb" id="4_twy5q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yrsft"]

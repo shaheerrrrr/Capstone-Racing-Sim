@@ -1,10 +1,12 @@
 extends VehicleBody3D
 
 const MAX_STEER = .8
-const ENGINE_POWER = 500
+var ENGINE_POWER = 500
+var race_position = 1
 var normal_friction_slip = 1.0
-var drift_friction_slip = 0.8
+var drift_friction_slip = 0.68
 var is_drifting = false
+var on_boostpanel = false
 
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera
@@ -54,6 +56,20 @@ func _stop_drift():
 	#print("Stop Drifting")
 	
 	
+
+func _speed_boost():
+	var ogpower = ENGINE_POWER
+	ENGINE_POWER = 600
+	await get_tree().create_timer(1.5).timeout
+	ENGINE_POWER = ogpower
+
+func _fix_stuck():
+	var transform = global_transform
+	transform.origin.x += 5*reverse_camera.position
+	transform.origin.y += 5
+	transform.basis = Basis()
+	global_transform = transform
+
 
 func _check_camera_switch():
 	if Input.is_action_just_pressed("perspective_change"):
