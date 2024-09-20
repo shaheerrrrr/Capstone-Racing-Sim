@@ -526,9 +526,9 @@ top_level = true
 transform = Transform3D(-1, 1.51808e-08, -8.60946e-08, 0, 0.984808, 0.173648, 8.74228e-08, 0.173648, -0.984808, 0, 1.7, -3.45865)
 current = true
 fov = 90.0
-far = 200.0
+far = 30000.0
 
 [node name="ReverseCamera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.00036253, 1.70949, 4.6824)
 fov = 90.0
-far = 200.0
+far = 30000.0

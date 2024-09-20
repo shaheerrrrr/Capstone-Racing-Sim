@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc0k1h663yaac"]
+
+[ext_resource type="PackedScene" uid="uid://dii0hish6n5gk" path="res://Assets/Tree/tree_animate.glb" id="1_c4nho"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_c4nho")]
+
+[node name="mesh_1" parent="Sketchfab_model/root/GLTF_SceneRootNode/Leaf_6_3" index="0"]
+blend_shapes/morph_0 = 0.703682
+blend_shapes/morph_1 = 0.497405
+blend_shapes/morph_2 = 0.000981327
+blend_shapes/morph_3 = 0.496375
+blend_shapes/morph_4 = 0.293153
+
+[node name="mesh_12" parent="Sketchfab_model/root/GLTF_SceneRootNode/Leaf_6_3" index="1"]
+blend_shapes/morph_0 = 0.703682
+blend_shapes/morph_1 = 0.497405
+blend_shapes/morph_2 = 0.000981327
+blend_shapes/morph_3 = 0.496375
+blend_shapes/morph_4 = 0.293153
