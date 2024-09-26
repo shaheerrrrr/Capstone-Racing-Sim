@@ -117,7 +117,7 @@ func _5thPlaceBoxRoulette() -> String:
 		return "Blooper"
 	elif (rand < .775): # 7.5% chance for a triple green shells
 		return "Thundercloud"
-	elif (rand < .875): # 12.5% chance for a triple green shells
+	elif (rand < .875): # 12.5% chance for a thundercloud
 		return "Triple Green Shells"
 	elif (rand < .975): # 10% chance for a triple red shells
 		return "Triple Red Shells"
@@ -126,7 +126,31 @@ func _5thPlaceBoxRoulette() -> String:
 	
 
 func _6thPlaceBoxRoulette() -> String:
-	
+	var rand = randf()
+	if (rand <.100): # 10% chance for a green shell
+		return "Red Shell"
+	elif (rand < .225): # 12.5% chance for a mushroom
+		return "Mushroom"
+	elif (rand < .375): # 15% chance for a triple mushroom
+		return "Triple Mushroom"
+	elif (rand < .450): # 7.5% chance for a bobomb
+		return "Bobomb"
+	elif (rand < .525): # 7.5% chance for a blue shell
+		return "Blue Shell"
+	elif (rand < .575): # 5% chance for a golden mushroom
+		return "Golden Mushroom"
+	elif (rand < .675): # 10% chance for a mega mushroom
+		return "Mega Mushroom"
+	elif (rand < .750): # 7.5% chance for a milker (renamed blooper)
+		return "Blooper"
+	elif (rand < .825): # 7.5% chance for a thundercloud
+		return "Thundercloud"
+	elif (rand < .900): # 7.5% chance for a triple green shells
+		return "Triple Green Shells"
+	elif (rand < .975): # 7.5% chance for a triple red shells
+		return "Triple Red Shells"
+	else: # 2.5% chance for a triple banana
+		return "Triple Banana"
 	
 
 func _7thPlaceBoxRoulette() -> String:
