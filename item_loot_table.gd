@@ -154,25 +154,107 @@ func _6thPlaceBoxRoulette() -> String:
 	
 
 func _7thPlaceBoxRoulette() -> String:
-	
+	var rand = randf()
+	if (rand <.050): # 5% chance for a green shell
+		return "Red Shell"
+	elif (rand < .150): # 10% chance for a mushroom
+		return "Mushroom"
+	elif (rand < .400): # 25% chance for a triple mushroom
+		return "Triple Mushroom"
+	elif (rand < .450): # 5% chance for a bobomb
+		return "Bobomb"
+	elif (rand < .525): # 7.5% chance for a blue shell
+		return "Blue Shell"
+	elif (rand < .625): # 10% chance for a golden mushroom
+		return "Golden Mushroom"
+	elif (rand < .725): # 10% chance for a mega mushroom
+		return "Mega Mushroom"
+	elif (rand < .800): # 7.5% chance for a milker (renamed blooper)
+		return "Blooper"
+	elif (rand < .875): # 7.5% chance for a thundercloud
+		return "Thundercloud"
+	elif (rand < .925): # 5% chance for a triple green shells
+		return "Triple Green Shells"
+	else: # 7.5% chance for a triple red shells
+		return "Triple Red Shells"
 	
 
 func _8thPlaceBoxRoulette() -> String:
-	
+	var rand = randf()
+	if (rand <.025): # 2.5% chance for a green shell
+		return "Red Shell"
+	elif (rand < .350): # 32.5% chance for a triple mushroom
+		return "Triple Mushroom"
+	elif (rand < .400): # 5% chance for a blue shell
+		return "Blue Shell"
+	elif (rand < .525): # 12.5% chance for a star
+		return "Star"
+	elif (rand < .750): # 22.5% chance for a golden mushroom
+		return "Golden Mushroom"
+	elif (rand < .850): # 10% chance for a mega mushroom
+		return "Mega Mushroom"
+	elif (rand < .900): # 5% chance for a milker (renamed blooper)
+		return "Blooper"
+	elif (rand < .950): # 7.5% chance for a thundercloud
+		return "Thundercloud"
+	else: # 5% chance for a triple red shells
+		return "Triple Red Shells"
 	
 
 func _9thPlaceBoxRoulette() -> String:
-	
+	var rand = randf()
+	if (rand < .375): # 37.5% chance for a triple mushroom
+		return "Triple Mushroom"
+	elif (rand < .400): # 2.5% chance for a blue shell
+		return "Blue Shell"
+	elif (rand < .600): # 20% chance for a star
+		return "Star"
+	elif (rand < .875): # 27.5% chance for a golden mushroom
+		return "Golden Mushroom"
+	elif (rand < .925): # 5% chance for a mega mushroom
+		return "Mega Mushroom"
+	elif (rand < .975): # 5% chance for a milker (renamed blooper)
+		return "Blooper"
+	else: # 5% chance for a bullet bill
+		return "Bullet Bill"
 	
 
 func _10thPlaceBoxRoulette() -> String:
-	
+	var rand = randf()
+	if (rand < .300): # 30% chance for a triple mushroom
+		return "Triple Mushroom"
+	elif (rand < .575): # 27.5% chance for a star
+		return "Star"
+	elif (rand < .925): # 35% chance for a golden mushroom
+		return "Golden Mushroom"
+	else: # 7.5% chance for a bullet bill
+		return "Bullet Bill"
 	
 
 func _11thPlaceBoxRoulette() -> String:
-	
+	var rand = randf()
+	if (rand < .125): # 12.5% chance for a triple mushroom
+		return "Triple Mushroom"
+	elif (rand < .200): # 7.5% chance for a lightning
+		return "Lightning"
+	elif (rand < .475): # 27.5% chance for a star
+		return "Star"
+	elif (rand < .775): # 30% chance for a golden mushroom
+		return "Golden Mushroom"
+	else: # 22.5% chance for a bullet bill
+		return "Bullet Bill"
 	
 
 func _12thPlaceBoxRoulette() -> String:
-	
+	var rand = randf()
+	if (rand < .050): # 5% chance for a triple mushroom
+		return "Triple Mushroom"
+	elif (rand < .250): # 20% chance for a lightning
+		return "Lightning"
+	elif (rand < .425): # 17.5% chance for a star
+		return "Star"
+	elif (rand < .650): # 22.5% chance for a golden mushroom
+		return "Golden Mushroom"
+	else: # 35% chance for a bullet bill
+		return "Bullet Bill"
 	
