@@ -16,7 +16,6 @@ var on_boostpanel = false
 @onready var frontRight_wheel = $"Front Right"
 @onready var frontLeft_wheel = $"Front Left"
 
-
 var look_at
 
 # Called when the node enters the scene tree for the first time.
