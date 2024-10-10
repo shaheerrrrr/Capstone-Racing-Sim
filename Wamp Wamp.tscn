@@ -2449,20 +2449,32 @@ shape = SubResource("ConcavePolygonShape3D_xsqgy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/untitled_fbx/RootNode/Track/speedway_ads/speedway_ads_Ads_0/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_loyhj")
 
+[node name="BoostPad (2)" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads" index="0"]
+transform = Transform3D(5.92329, 0.00941127, -0.956249, -0.0142012, 3.99999, 0.000610259, 0.956248, 0.00110723, 5.92331, 32.6301, -112.702, 47.32)
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads/BoostPad (2)/BoostPad (2)_BoostPadMaterial_0" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads/BoostPad (2)/BoostPad (2)_BoostPadMaterial_0/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_1j13f")
+
+[node name="BoostPad (3)" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads" index="1"]
+transform = Transform3D(5.92329, 0.00941127, -0.956249, -0.0142012, 3.99999, 0.000610259, 0.956248, 0.00110723, 5.92331, 27.2601, -112.711, -19.77)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads/BoostPad (3)/BoostPad (3)_BoostPadMaterial_0" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads/BoostPad (3)/BoostPad (3)_BoostPadMaterial_0/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_2xa4u")
 
+[node name="BoostPad (5)" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads" index="2"]
+transform = Transform3D(-3.99963, 0.0546158, 1.2174e-06, 0.0546158, 3.99963, 6.82824e-07, -6.03983e-07, 3.49691e-07, -8, 252.2, -511.083, 100.678)
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads/BoostPad (5)/BoostPad (5)_BoostPadMaterial_0" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads/BoostPad (5)/BoostPad (5)_BoostPadMaterial_0/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_nxt10")
+
+[node name="BoostPad (2)_001" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads" index="3"]
+transform = Transform3D(-0.0677285, -1.01309, -6.94774, 0.00215542, 3.86957, -1.81915, 7.45426, -0.0103237, -0.0626003, 96.4593, -212.663, -74.0853)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/untitled_fbx/RootNode/SceneReferences/Boostpads/BoostPad (2)_001/BoostPad (2)_001_BoostPadMaterial_0" index="0"]
 

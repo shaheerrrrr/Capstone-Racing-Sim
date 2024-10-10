@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cni461j0e7jiw"]
+
+[node name="BoostPad (2)" type="Node3D"]
+transform = Transform3D(6, 0, 0, 0, 4, 0, 0, 0, 6, 0, 0, 0)

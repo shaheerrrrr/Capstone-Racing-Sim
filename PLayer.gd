@@ -3,7 +3,7 @@ extends VehicleBody3D
 const MAX_STEER = .8
 const ENGINE_POWER = 500
 var normal_friction_slip = 1.0
-var drift_friction_slip = 0.68
+var drift_friction_slip = 10
 var is_drifting = false
 
 @onready var camera_pivot = $CameraPivot
@@ -30,20 +30,18 @@ func _physics_process(delta: float) -> void:
 	camera_pivot.global_position = camera_pivot.global_position.lerp(global_position, delta * 20.0)
 	camera_pivot.transform = camera_pivot.transform.interpolate_with(transform, delta * 5.0)
 	look_at = look_at.lerp(global_position + linear_velocity, delta * 5.0)
-	#camera_3d.look_at(look_at)
-	#reverse_camera.look_at(look_at)
 	_check_camera_switch()
 	if Input.is_action_just_pressed("flip_vehicle"):
 		_flip_vehicle()
 	if Input.is_action_pressed("is_drifting"):
-		_drift()
+		_drift(delta)
 	else:
 		_stop_drift()
 	
 	
-func _drift():
-	backLeft_wheel.wheel_friction_slip = drift_friction_slip
-	backRight_wheel.wheel_friction_slip = drift_friction_slip
+func _drift(a:float):
+	backLeft_wheel.wheel_friction_slip = drift_friction_slip * (.5-a)
+	backRight_wheel.wheel_friction_slip = drift_friction_slip * (.5-a)
 	#print("Drifting")
 	
 func _stop_drift():
