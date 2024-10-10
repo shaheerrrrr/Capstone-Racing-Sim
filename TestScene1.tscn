@@ -29,4 +29,7 @@ shadow_enabled = true
 transform = Transform3D(160, 0, 0, 0, 160, 0, 0, 0, 160, -1321.35, 0, -1253.17)
 
 [node name="Player" parent="." instance=ExtResource("2_rtiqu")]
+
 transform = Transform3D(-3.78931, 0, -1.28106, 0, 4, 0, 1.28106, 0, -3.78931, -136.098, 51.5149, 126.184)
+
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -136.098, 51.5149, 126.184)

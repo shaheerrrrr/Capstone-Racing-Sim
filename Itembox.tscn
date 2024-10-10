@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dej4psccrsxx0"]
+
+[ext_resource type="PackedScene" uid="uid://dmnq7gyxtjot4" path="res://Assets/items/item_box.glb" id="1_dpkts"]
+[ext_resource type="Script" path="res://item_loot_table.gd" id="2_tgp84"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_dpkts")]
+script = ExtResource("2_tgp84")
