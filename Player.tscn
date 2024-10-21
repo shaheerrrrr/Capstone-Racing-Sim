@@ -532,3 +532,11 @@ far = 30000.0
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.00036253, 1.70949, 4.6824)
 fov = 90.0
 far = 30000.0
+
+[node name="Speedometer" type="RichTextLabel" parent="."]
+offset_left = 1498.0
+offset_top = 987.0
+offset_right = 1870.0
+offset_bottom = 1039.0
+bbcode_enabled = true
+text = "[right]Speedometer so this text wont show"

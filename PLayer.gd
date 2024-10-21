@@ -1,13 +1,14 @@
 extends VehicleBody3D
 
-const MAX_STEER = .8
+const MAX_STEER = 1
 var ENGINE_POWER = 500
 var race_position = 1
 var normal_friction_slip = 1.0
-var drift_friction_slip = 10
-var drift_friction_slip = 1.0
+var drift_friction_slip = 1
 var is_drifting = false
 var on_boostpanel = false
+var lap_count = 0
+var speed
 
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera
@@ -29,6 +30,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	steering = move_toward(steering, Input.get_axis("move_right", "move_left") * MAX_STEER, delta * 10 * 4)
 	engine_force = Input.get_axis("move_forward", "move_backwards") * ENGINE_POWER
+	speed = engine_force
 	camera_pivot.global_position = camera_pivot.global_position.lerp(global_position, delta * 20.0)
 	camera_pivot.transform = camera_pivot.transform.interpolate_with(transform, delta * 5.0)
 	look_at = look_at.lerp(global_position + linear_velocity, delta * 5.0)
@@ -53,13 +55,6 @@ func _stop_drift():
 	#frontLeft_wheel.wheel_friction_slip = normal_friction_slip
 	#print("Stop Drifting")
 	
-	
-
-func _speed_boost():
-	var ogpower = ENGINE_POWER
-	ENGINE_POWER = 600
-	await get_tree().create_timer(1.5).timeout
-	ENGINE_POWER = ogpower
 
 func _fix_stuck():
 	var transform = global_transform
@@ -86,3 +81,9 @@ func _flip_vehicle():
 func is_upside_down() -> bool:
 	var up_vector = global_transform.basis.y.normalized()
 	return up_vector.dot(Vector3(0, 1, 0)) < 0.5
+
+func _getSpeed() -> int:
+	return speed
+
+func _setSpeed(s: int) -> void:
+	speed = s

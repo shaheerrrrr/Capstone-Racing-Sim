@@ -1,16 +1,13 @@
-#extends Label
-#
-#var speed : float
-#
-#@onready var car = $"../Player"
-#
-## Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#text = "0 mph"
-#
-#
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#speed = car.speed
-	#speed *= 10
-	#text = str(int(speed)) + "mph"
+extends Label
+
+var speed : float
+@onready var player = $"Player"
+
+func _ready():
+	text = "0 mph"
+
+func _physics_process(delta: float) -> void:
+	speed = player._getSpeed()
+	
+	text = str(int(speed)) + "km/h"
+	$Speedometer.text = text
