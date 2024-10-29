@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://1pmwxoetldb4"]
+
+[ext_resource type="Script" path="res://lapcounter.gd" id="1_dh47c"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_il5hu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gju85"]
+albedo_color = Color(0, 0, 0, 0)
+
+[node name="LapCoutner" type="Node3D"]
+
+[node name="lapcounter" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("QuadMesh_il5hu")
+surface_material_override/0 = SubResource("StandardMaterial3D_gju85")
+script = ExtResource("1_dh47c")

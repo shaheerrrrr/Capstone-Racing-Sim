@@ -1,21 +1,21 @@
 extends VehicleBody3D
 
-const MAX_STEER = .8
-var ENGINE_POWER = 500
-var race_position = 1
+const MAX_STEER = .4
+const ENGINE_POWER = 700
 var normal_friction_slip = 1.0
-var drift_friction_slip = 10
-var drift_friction_slip = 1.0
+var backwheeldrift = .7
+var frontwheeldrift = .89
 var is_drifting = false
-var on_boostpanel = false
-
+var lapcount = 0
+var speed = 0
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera
 @onready var reverse_camera = $CameraPivot/ReverseCamera
-@onready var backRight_wheel = $"Back Right"
 @onready var backLeft_wheel = $"Back Left"
 @onready var frontRight_wheel = $"Front Right"
+@onready var backRight_wheel = $"Back Right"
 @onready var frontLeft_wheel = $"Front Left"
+
 
 var look_at
 
@@ -23,8 +23,6 @@ var look_at
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	look_at = global_position
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	steering = move_toward(steering, Input.get_axis("move_right", "move_left") * MAX_STEER, delta * 10 * 4)
@@ -36,38 +34,30 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("flip_vehicle"):
 		_flip_vehicle()
 	if Input.is_action_pressed("is_drifting"):
-		_drift(delta)
+		_drift()
 	else:
 		_stop_drift()
+		
+	speed = linear_velocity.length()
 	
 	
-func _drift(a:float):
-	backLeft_wheel.wheel_friction_slip = drift_friction_slip * (.5-a)
-	backRight_wheel.wheel_friction_slip = drift_friction_slip * (.5-a)
+func _drift():
+	backLeft_wheel.wheel_friction_slip = backwheeldrift
+	backRight_wheel.wheel_friction_slip = backwheeldrift
+	frontRight_wheel.wheel_friction_slip = frontwheeldrift
+	frontLeft_wheel.wheel_friction_slip = frontwheeldrift
 	#print("Drifting")
 	
 func _stop_drift():
 	backLeft_wheel.wheel_friction_slip = normal_friction_slip
 	backRight_wheel.wheel_friction_slip = normal_friction_slip
-	#frontRight_wheel.wheel_friction_slip = normal_friction_slip
-	#frontLeft_wheel.wheel_friction_slip = normal_friction_slip
+	frontRight_wheel.wheel_friction_slip = normal_friction_slip
+	frontLeft_wheel.wheel_friction_slip = normal_friction_slip
 	#print("Stop Drifting")
 	
-	
-
-func _speed_boost():
-	var ogpower = ENGINE_POWER
-	ENGINE_POWER = 600
-	await get_tree().create_timer(1.5).timeout
-	ENGINE_POWER = ogpower
-
-func _fix_stuck():
-	var transform = global_transform
-	transform.origin.x += 5*reverse_camera.position
-	transform.origin.y += 5
-	transform.basis = Basis()
-	global_transform = transform
-
+func _addlap():
+	lapcount += 1
+	print(lapcount)
 
 func _check_camera_switch():
 	if Input.is_action_just_pressed("perspective_change"):
