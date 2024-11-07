@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1pp36fqf63li"]
+[gd_scene load_steps=6 format=3 uid="uid://d1pp36fqf63li"]
 
 [ext_resource type="PackedScene" uid="uid://b7utbcceih2l1" path="res://Wamp Wamp.tscn" id="1_o6ypu"]
-[ext_resource type="Script" path="res://boost_pad.gd" id="2_coh6q"]
 [ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_rtiqu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4l2r"]
@@ -17,8 +16,6 @@ sky = SubResource("Sky_o1pwn")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_grfkm"]
-
 [node name="TestScene1" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -29,19 +26,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_o6ypu")]
-<<<<<<< Updated upstream
 transform = Transform3D(140, 0, 0, 0, 140, 0, 0, 0, 140, -1315.24, 0.0427246, -1247.42)
-=======
-transform = Transform3D(160, 0, 0, 0, 160, 0, 0, 0, 160, -1321.35, 0, -1253.17)
-script = ExtResource("2_coh6q")
-
-[node name="Boost_Pad" type="Area3D" parent="Sketchfab_Scene"]
->>>>>>> Stashed changes
 
 [node name="Player" parent="." instance=ExtResource("2_rtiqu")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 264.54, 58.945, 122.506)
-
-[node name="FinishLine" type="MeshInstance3D" parent="."]
-transform = Transform3D(80, 0, 0, 0, 30, 0, 0, 0, 10, 267.464, 52.7548, 166.228)
-visible = false
-mesh = SubResource("BoxMesh_grfkm")
+transform = Transform3D(0.999903, 0, -0.0139622, 0, 1, 0, 0.0139622, 0, 0.999903, 77.3201, 42.6808, -23.1027)

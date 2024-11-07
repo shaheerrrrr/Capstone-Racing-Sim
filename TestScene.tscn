@@ -1,10 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bik5xvwjwnnpd"]
 
-<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
-=======
-[ext_resource type="PackedScene" uid="uid://dd232vn7o0hm4" path="res://TestMap.tscn" id="2_gfnct"]
->>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_laxwu"]
 [ext_resource type="PackedScene" uid="uid://cc0k1h663yaac" path="res://Tree.tscn" id="3_35kur"]
 [ext_resource type="PackedScene" uid="uid://qq07d4l882yj" path="res://Assets/Bushes/bush.glb" id="4_twy5q"]
@@ -36,6 +32,7 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_laxwu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.52027, 1.50379, -36.1282)
+mass = 30.0
 gravity_scale = 5.0
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
@@ -63,10 +60,10 @@ text = "asdf"
 script = ExtResource("6_gs6f5")
 
 [node name="speedometer" type="Label" parent="."]
-offset_left = 1766.0
-offset_top = 941.0
-offset_right = 1925.0
-offset_bottom = 997.0
+offset_left = 1654.0
+offset_top = 940.0
+offset_right = 1813.0
+offset_bottom = 996.0
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 script = ExtResource("7_uxlcq")
