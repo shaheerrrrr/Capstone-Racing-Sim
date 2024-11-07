@@ -28,7 +28,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_o6ypu")]
-transform = Transform3D(160, 0, 0, 0, 160, 0, 0, 0, 160, -1321.35, 0, -1253.17)
+transform = Transform3D(140, 0, 0, 0, 140, 0, 0, 0, 140, -1315.24, 0.0427246, -1247.42)
 
 [node name="Player" parent="." instance=ExtResource("2_rtiqu")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 264.54, 58.945, 122.506)
