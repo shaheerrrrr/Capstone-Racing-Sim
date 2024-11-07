@@ -85,9 +85,3 @@ func _flip_vehicle():
 func is_upside_down() -> bool:
 	var up_vector = global_transform.basis.y.normalized()
 	return up_vector.dot(Vector3(0, 1, 0)) < 0.5
-
-func _getSpeed() -> int:
-	return speed
-
-func _setSpeed(s: int) -> void:
-	speed = s

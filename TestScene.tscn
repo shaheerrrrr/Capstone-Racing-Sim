@@ -1,6 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bik5xvwjwnnpd"]
 
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
+=======
+[ext_resource type="PackedScene" uid="uid://dd232vn7o0hm4" path="res://TestMap.tscn" id="2_gfnct"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_laxwu"]
 [ext_resource type="PackedScene" uid="uid://cc0k1h663yaac" path="res://Tree.tscn" id="3_35kur"]
 [ext_resource type="PackedScene" uid="uid://qq07d4l882yj" path="res://Assets/Bushes/bush.glb" id="4_twy5q"]
