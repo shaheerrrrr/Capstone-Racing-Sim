@@ -1,12 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bik5xvwjwnnpd"]
+[gd_scene load_steps=9 format=3 uid="uid://bik5xvwjwnnpd"]
 
 [ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
-[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_laxwu"]
-[ext_resource type="PackedScene" uid="uid://cc0k1h663yaac" path="res://Tree.tscn" id="3_35kur"]
-[ext_resource type="PackedScene" uid="uid://qq07d4l882yj" path="res://Assets/Bushes/bush.glb" id="4_twy5q"]
+[ext_resource type="PackedScene" uid="uid://dq86uxaadbax4" path="res://Player.tscn" id="2_laxwu"]
 [ext_resource type="PackedScene" uid="uid://1pmwxoetldb4" path="res://lap_coutner.tscn" id="5_i5q3w"]
 [ext_resource type="Script" path="res://timer.gd" id="6_gs6f5"]
-[ext_resource type="Script" path="res://speedometer.gd" id="7_uxlcq"]
+[ext_resource type="Script" path="res://speedometer.gd" id="7_ksie6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yrsft"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -30,25 +28,15 @@ environment = SubResource("Environment_24ss8")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("2_laxwu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.52027, 1.50379, -36.1282)
-mass = 30.0
-gravity_scale = 5.0
-
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
-
-[node name="Sketchfab_Scene2" parent="." instance=ExtResource("3_35kur")]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 185, 2, -80)
-
-[node name="Sketchfab_Scene2" parent="Sketchfab_Scene2" instance=ExtResource("3_35kur")]
-transform = Transform3D(-0.9, 0, -7.86805e-08, 0, 0.9, 0, 7.86805e-08, 0, -0.9, -166.202, 0, 62.782)
-
-[node name="Sketchfab_Scene" parent="Sketchfab_Scene2" instance=ExtResource("4_twy5q")]
-transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -171.028, -2.24503, 46.6536)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.279, 0, 0.147)
 
 [node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
 visible = false
+
+[node name="Player" parent="." instance=ExtResource("2_laxwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.908769, 0)
 
 [node name="timer" type="Label" parent="."]
 offset_left = 926.0
@@ -66,4 +54,4 @@ offset_right = 1813.0
 offset_bottom = 996.0
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
-script = ExtResource("7_uxlcq")
+script = ExtResource("7_ksie6")

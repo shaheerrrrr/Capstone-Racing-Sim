@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 const MAX_STEER = .4
-const ENGINE_POWER = 700
+const ENGINE_POWER = 800
 var normal_friction_slip = 1.0
 var backwheeldrift = .7
 var frontwheeldrift = .89
@@ -23,6 +23,7 @@ var look_at
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	look_at = global_position
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	steering = move_toward(steering, Input.get_axis("move_right", "move_left") * MAX_STEER, delta * 10 * 4)
@@ -85,3 +86,8 @@ func _flip_vehicle():
 func is_upside_down() -> bool:
 	var up_vector = global_transform.basis.y.normalized()
 	return up_vector.dot(Vector3(0, 1, 0)) < 0.5
+
+func _getSpeed() -> int:
+	return speed
+func _setSpeed(s: int) -> void:
+	speed = s
