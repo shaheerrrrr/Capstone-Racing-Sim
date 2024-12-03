@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 const MAX_STEER = .4
-const ENGINE_POWER = 800
+const ENGINE_POWER = 700
 var normal_friction_slip = 1.0
 var backwheeldrift = .7
 var frontwheeldrift = .89
