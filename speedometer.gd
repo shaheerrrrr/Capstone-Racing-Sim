@@ -1,7 +1,7 @@
 extends Label
 var speed : int
 
-@onready var player = $"../Player/Vehicle"
+@onready var player = $"../Player"
 func _ready():
 	text = ""
 	speed = 0
