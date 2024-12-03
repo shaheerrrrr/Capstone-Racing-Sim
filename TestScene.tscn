@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
 [ext_resource type="PackedScene" uid="uid://dq86uxaadbax4" path="res://Player.tscn" id="2_laxwu"]
 [ext_resource type="PackedScene" uid="uid://1pmwxoetldb4" path="res://lap_coutner.tscn" id="5_i5q3w"]
+[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="6_4tuxg"]
 [ext_resource type="Script" path="res://timer.gd" id="6_gs6f5"]
 [ext_resource type="Script" path="res://speedometer.gd" id="7_ksie6"]
 
@@ -35,9 +36,6 @@ transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.279, 0, 0.147)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
 visible = false
 
-[node name="Player" parent="." instance=ExtResource("2_laxwu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.908769, 0)
-
 [node name="timer" type="Label" parent="."]
 offset_left = 926.0
 offset_top = 78.0
@@ -55,3 +53,9 @@ offset_bottom = 996.0
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 script = ExtResource("7_ksie6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("6_qkq2p")]
+
+[node name="Player" parent="." instance=ExtResource("6_4tuxg")]
