@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bik5xvwjwnnpd"]
+[gd_scene load_steps=9 format=3 uid="uid://bik5xvwjwnnpd"]
 
-[ext_resource type="PackedScene" uid="uid://dd232vn7o0hm4" path="res://TestMap.tscn" id="2_gfnct"]
-[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Player.tscn" id="2_laxwu"]
+[ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
+[ext_resource type="PackedScene" uid="uid://dq86uxaadbax4" path="res://Player.tscn" id="2_laxwu"]
 [ext_resource type="PackedScene" uid="uid://1pmwxoetldb4" path="res://lap_coutner.tscn" id="5_i5q3w"]
 [ext_resource type="Script" path="res://timer.gd" id="6_gs6f5"]
-[ext_resource type="PackedScene" uid="uid://deqd0lr7amnp2" path="res://pause_screen.tscn" id="6_qkq2p"]
 [ext_resource type="Script" path="res://speedometer.gd" id="7_ksie6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yrsft"]
@@ -56,7 +55,3 @@ offset_bottom = 996.0
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 script = ExtResource("7_ksie6")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("6_qkq2p")]
