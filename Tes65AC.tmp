@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://bik5xvwjwnnpd"]
+[gd_scene load_steps=11 format=3 uid="uid://bik5xvwjwnnpd"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_vsrga"]
 [ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
 [ext_resource type="PackedScene" uid="uid://dq86uxaadbax4" path="res://Player.tscn" id="2_laxwu"]
 [ext_resource type="PackedScene" uid="uid://1pmwxoetldb4" path="res://lap_coutner.tscn" id="5_i5q3w"]
@@ -23,7 +22,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_vsrga")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_24ss8")
@@ -40,49 +38,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_laxwu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0716639, 0.788011, -0.0492032)
-script = null
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.908769, 0)
 
 [node name="timer" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.032
-offset_left = -51.5
-offset_top = 75.0
-offset_right = 51.5
-offset_bottom = 34.44
-grow_horizontal = 2
+offset_left = 926.0
+offset_top = 78.0
+offset_right = 1224.0
+offset_bottom = 187.0
 theme_override_font_sizes/font_size = 50
 text = "asdf"
 script = ExtResource("6_gs6f5")
 
 [node name="speedometer" type="Label" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -159.0
-offset_top = -56.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 1654.0
+offset_top = 940.0
+offset_right = 1813.0
+offset_bottom = 996.0
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 script = ExtResource("7_ksie6")
 
 [node name="coutndown" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.5
-offset_top = -78.0
-offset_right = 143.5
-offset_bottom = 78.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 844.0
+offset_top = 523.0
+offset_right = 1131.0
+offset_bottom = 679.0
 theme_override_font_sizes/font_size = 50
 text = "Placeholder"
 script = ExtResource("6_ifh1t")
@@ -90,36 +70,3 @@ script = ExtResource("6_ifh1t")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("6_dcwtx")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-metadata/_edit_group_ = true
-
-[node name="Host" type="Button" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -178.0
-offset_right = 474.0
-grow_vertical = 0
-text = "Host
-"
-
-[node name="Join" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -474.0
-offset_top = -178.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Join
-"
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player.tscn")
-spawn_path = NodePath("..")

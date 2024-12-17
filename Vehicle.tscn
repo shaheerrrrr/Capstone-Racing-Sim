@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=4 uid="uid://cua75myj3xuu2"]
 
-[ext_resource type="Script" path="res://PLayer.gd" id="1_csxyk"]
+[ext_resource type="Script" path="res://vehicle.gd" id="1_csxyk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w4j2v"]
 resource_name = "tire.003"
@@ -459,7 +459,7 @@ center_of_mass = Vector3(0, -0.02, 1)
 script = ExtResource("1_csxyk")
 
 [node name="Front Right" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.7225, 0, -6.3163e-08, 0, 0.7225, 0, 6.3163e-08, 0, -0.7225, -1.10468, -0.412293, 2.09465)
+transform = Transform3D(-0.7225, 0, -1.09094e-07, 0, 0.7225, 0, 1.09094e-07, 0, -0.7225, -1.10468, -0.412293, 2.09465)
 use_as_steering = true
 wheel_roll_influence = 0.01
 wheel_friction_slip = 1.4
@@ -471,7 +471,7 @@ mesh = SubResource("ArrayMesh_2b2jl")
 skeleton = NodePath("")
 
 [node name="Front Left" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.85, 0, -7.43094e-08, 0, 0.85, 0, 7.43094e-08, 0, -0.85, 1.11284, -0.397038, 2.10565)
+transform = Transform3D(-0.85, 0, -1.28346e-07, 0, 0.85, 0, 1.28346e-07, 0, -0.85, 1.11284, -0.397038, 2.10565)
 use_as_steering = true
 wheel_roll_influence = 0.01
 wheel_friction_slip = 1.4
@@ -483,7 +483,7 @@ mesh = SubResource("ArrayMesh_rualp")
 skeleton = NodePath("")
 
 [node name="Back Right" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.7225, 0, -6.3163e-08, 0, 0.7225, 0, 6.3163e-08, 0, -0.7225, -1.11144, -0.408504, -1.03312)
+transform = Transform3D(-0.7225, 0, -1.09094e-07, 0, 0.7225, 0, 1.09094e-07, 0, -0.7225, -1.11144, -0.408504, -1.03312)
 use_as_traction = true
 wheel_roll_influence = 0.01
 wheel_rest_length = 0.2
@@ -497,7 +497,7 @@ mesh = SubResource("ArrayMesh_jryx4")
 skeleton = NodePath("")
 
 [node name="Back Left" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.85, 0, -7.43094e-08, 0, 0.85, 0, 7.43094e-08, 0, -0.85, 1.09631, -0.401169, -1.02252)
+transform = Transform3D(-0.85, 0, -1.28346e-07, 0, 0.85, 0, 1.28346e-07, 0, -0.85, 1.09631, -0.401169, -1.02252)
 use_as_traction = true
 wheel_roll_influence = 0.01
 wheel_rest_length = 0.2
@@ -524,7 +524,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 1)
 top_level = true
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-0.972518, 1.47636e-08, -8.37286e-08, -6.95905e-09, 0.940707, 0.246702, 8.4735e-08, 0.246702, -0.940707, 0, 1.7, -3.45865)
+transform = Transform3D(-0.972518, 3.00566e-08, -1.42043e-07, -6.95905e-09, 0.940707, 0.246702, 1.45021e-07, 0.246702, -0.940707, 0, 1.7, -3.45865)
 current = true
 fov = 90.0
 far = 30000.0
