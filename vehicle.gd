@@ -4,10 +4,10 @@ const MAX_STEER = .4
 const ENGINE_POWER = 800
 var normal_friction_slip = 1.0
 var backwheeldrift = .7
-var frontwheeldrift = .89
+var frontwheeldrift = .8
 var is_drifting = false
-var lapcount = 0
 var speed = 0
+var finished = false
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera
 @onready var reverse_camera = $CameraPivot/ReverseCamera
@@ -15,7 +15,7 @@ var speed = 0
 @onready var frontRight_wheel = $"Front Right"
 @onready var backRight_wheel = $"Back Right"
 @onready var frontLeft_wheel = $"Front Left"
-
+@onready var timer = $timer
 
 var look_at
 
@@ -39,9 +39,8 @@ func _physics_process(delta: float) -> void:
 		_drift()
 	else:
 		_stop_drift()
-		
+
 	speed = linear_velocity.length()
-	
 	
 func _drift():
 	backLeft_wheel.wheel_friction_slip = backwheeldrift
@@ -65,10 +64,6 @@ func _fix_stuck():
 	transform.basis = Basis()
 	global_transform = transform
 
-func _addlap():
-	lapcount += 1
-	print(lapcount)
-
 func _check_camera_switch():
 	if Input.is_action_just_pressed("perspective_change"):
 		if camera_3d.current == true:
@@ -91,3 +86,9 @@ func _getSpeed() -> int:
 	return speed
 func _setSpeed(s: int) -> void:
 	speed = s
+
+func _on_Player_body_entered(body):	
+	var bodyName = body.getName()
+	if bodyName == "Finishline":
+		finished = true
+		print("Finished!!!")

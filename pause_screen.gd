@@ -27,6 +27,8 @@ func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_to_title_pressed() -> void:
+	get_tree().paused = false  # Unpause the game
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)  # Ensure mouse is visible
 	get_tree().change_scene_to_file("res://title_screen.tscn")
 
 func _process(delta: float) -> void:
