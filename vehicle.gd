@@ -8,6 +8,7 @@ var frontwheeldrift = .8
 var is_drifting = false
 var speed = 0
 var finished = false
+var start = false
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera
 @onready var reverse_camera = $CameraPivot/ReverseCamera
@@ -26,9 +27,10 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	steering = move_toward(steering, Input.get_axis("move_right", "move_left") * MAX_STEER, delta * 10 * 4)
-	engine_force = Input.get_axis("move_forward", "move_backwards") * ENGINE_POWER
-	speed = engine_force
+	if start:
+		steering = move_toward(steering, Input.get_axis("move_right", "move_left") * MAX_STEER, delta * 10 * 4)
+		engine_force = Input.get_axis("move_forward", "move_backwards") * ENGINE_POWER
+		speed = engine_force
 	camera_pivot.global_position = camera_pivot.global_position.lerp(global_position, delta * 20.0)
 	camera_pivot.transform = camera_pivot.transform.interpolate_with(transform, delta * 5.0)
 	look_at = look_at.lerp(global_position + linear_velocity, delta * 5.0)
@@ -86,6 +88,9 @@ func _getSpeed() -> int:
 	return speed
 func _setSpeed(s: int) -> void:
 	speed = s
+
+func _start() -> void:
+	start = true
 
 func _on_Player_body_entered(body):	
 	var bodyName = body.getName()

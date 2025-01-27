@@ -7,6 +7,5 @@ func _ready():
 	speed = 0
 	
 func _physics_process(delta: float) -> void:
-	speed = player._getSpeed()
-	
+	speed = player._getSpeed() * 1.75
 	text = str(speed) + "MPH"

@@ -37,7 +37,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.279, 0, 0.147)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 6.353, 0.54, -27.1763)
 
 [node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
@@ -58,7 +58,7 @@ offset_right = 51.5
 offset_bottom = 34.44
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
-text = "asdf"
+text = "0.00"
 script = ExtResource("6_gs6f5")
 
 [node name="speedometer" type="Label" parent="."]
