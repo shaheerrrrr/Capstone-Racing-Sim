@@ -9,7 +9,7 @@ func _process(delta: float) -> void:
 	if time_elapsed <= 3:
 		text = str(4 - time_elapsed).pad_decimals(0)
 	else:
-		resume()
+		#resume()
 		text = ""
 		queue_free()
 
@@ -22,5 +22,5 @@ func stop() -> void:
 	is_stopped = true
 
 
-func resume():
-	player.start()
+#func resume():
+	#player.start()

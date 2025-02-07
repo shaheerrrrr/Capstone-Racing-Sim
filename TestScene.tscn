@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bik5xvwjwnnpd"]
+[gd_scene load_steps=12 format=3 uid="uid://bik5xvwjwnnpd"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_vsrga"]
 [ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
@@ -22,10 +22,6 @@ sky = SubResource("Sky_007pn")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="QuadMesh" id="QuadMesh_5v40h"]
-
-[sub_resource type="GDScript" id="GDScript_7k5m7"]
-
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_vsrga")
 
@@ -37,7 +33,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 6.353, 0.54, -27.1763)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.353, 0.0560065, -27.1763)
 
 [node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
@@ -89,6 +85,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Placeholder"
+horizontal_alignment = 1
 script = ExtResource("6_ifh1t")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -101,34 +98,6 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_group_ = true
 
-[node name="Host" type="Button" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -178.0
-offset_right = 474.0
-grow_vertical = 0
-text = "Host
-"
-
-[node name="Join" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -474.0
-offset_top = -178.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Join
-"
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player.tscn")
 spawn_path = NodePath("..")
-
-[node name="Finishline" type="MeshInstance3D" parent="."]
-transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 1, -6.01832, -0.0849611, 121.644)
-mesh = SubResource("QuadMesh_5v40h")
-script = SubResource("GDScript_7k5m7")

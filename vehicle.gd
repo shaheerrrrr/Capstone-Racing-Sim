@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 const MAX_STEER = .4
-const ENGINE_POWER = 800
+const ENGINE_POWER = 10000
 var normal_friction_slip = 1.0
 var backwheeldrift = .7
 var frontwheeldrift = .8
@@ -17,7 +17,7 @@ var start = false
 @onready var backRight_wheel = $"Back Right"
 @onready var frontLeft_wheel = $"Front Left"
 @onready var timer = $timer
-
+var time_elapsed = 0
 var look_at
 
 # Called when the node enters the scene tree for the first time.
@@ -41,7 +41,9 @@ func _physics_process(delta: float) -> void:
 		_drift()
 	else:
 		_stop_drift()
-
+	time_elapsed += delta
+	if time_elapsed > 3:
+		start = true
 	speed = linear_velocity.length()
 	
 func _drift():
