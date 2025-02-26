@@ -5,7 +5,7 @@ func _ready():
 
 func _on_start_button_pressed() -> void:
 	print("start pressed")
-	get_tree().change_scene_to_file("res://TestScene.tscn")
+	get_tree().change_scene_to_file("res://MapSelect.tscn")
 
 func _on_quit_button_pressed() -> void:
 	print("quit pressed")

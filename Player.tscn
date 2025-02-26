@@ -16,7 +16,7 @@ properties/1/replication_mode = 1
 script = SubResource("GDScript_2tnjd")
 
 [node name="Vehicle" parent="." instance=ExtResource("1_k2ky8")]
-mass = 300.0
+mass = 150.0
 contact_monitor = true
 max_contacts_reported = 1
 

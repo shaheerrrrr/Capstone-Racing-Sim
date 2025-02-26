@@ -8,10 +8,11 @@ func _process(delta: float) -> void:
 	if (Input.is_action_just_pressed("move_backwards") or Input.is_action_just_pressed("move_forward") or Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right")) and go:
 		started = true
 	if !is_stopped and started:
-		time_elapsed += delta
-		text = str(time_elapsed).pad_decimals(2)
+		text = str(time_elapsed-3).pad_decimals(2)
+	time_elapsed += delta
 	if time_elapsed > 3:
 		go = true
+
 
 func reset() -> void:
 	time_elapsed = 0.0

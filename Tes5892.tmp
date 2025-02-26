@@ -33,7 +33,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.353, 0.0560065, -27.1763)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 6.353, 0.0560065, -27.1763)
 
 [node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
