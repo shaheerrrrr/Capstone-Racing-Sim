@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://bik5xvwjwnnpd"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_vsrga"]
+[ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
+[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="4_5q17w"]
+[ext_resource type="PackedScene" uid="uid://1pmwxoetldb4" path="res://lap_coutner.tscn" id="5_i5q3w"]
+[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="6_dcwtx"]
+[ext_resource type="Script" path="res://timer.gd" id="6_gs6f5"]
+[ext_resource type="Script" path="res://countdown.gd" id="6_ifh1t"]
+[ext_resource type="Script" path="res://speedometer.gd" id="7_ksie6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yrsft"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_007pn"]
+sky_material = SubResource("ProceduralSkyMaterial_yrsft")
+
+[sub_resource type="Environment" id="Environment_24ss8"]
+background_mode = 2
+sky = SubResource("Sky_007pn")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_vsrga")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_24ss8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 6.353, 0.0560065, -27.1763)
+
+[node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
+visible = false
+
+[node name="Vehicle" parent="." instance=ExtResource("4_5q17w")]
+
+[node name="timer" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.032
+offset_left = -51.5
+offset_top = 75.0
+offset_right = 51.5
+offset_bottom = 34.44
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "0.00"
+script = ExtResource("6_gs6f5")
+
+[node name="speedometer" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "0 MPH"
+script = ExtResource("7_ksie6")
+
+[node name="coutndown" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = -78.0
+offset_right = 143.5
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Placeholder"
+horizontal_alignment = 1
+script = ExtResource("6_ifh1t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("6_dcwtx")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_group_ = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player.tscn")
+spawn_path = NodePath("..")
