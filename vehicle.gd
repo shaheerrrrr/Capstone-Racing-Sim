@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 const MAX_STEER = .4
-const ENGINE_POWER = 10000
+const ENGINE_POWER = 800
 var normal_friction_slip = 1.0
 var backwheeldrift = .7
 var frontwheeldrift = .8
@@ -99,3 +99,6 @@ func _on_Player_body_entered(body):
 	if bodyName == "Finishline":
 		finished = true
 		print("Finished!!!")
+
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())

@@ -24,6 +24,7 @@ glow_enabled = true
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_vsrga")
+player_scene = ExtResource("2_laxwu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_24ss8")
@@ -33,7 +34,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.353, 0.0560065, -27.1763)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 6.353, 0.0560065, -27.1763)
 
 [node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
@@ -101,3 +102,20 @@ metadata/_edit_group_ = true
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player.tscn")
 spawn_path = NodePath("..")
+
+[node name="Host" type="Button" parent="."]
+offset_left = 6.0
+offset_top = 1005.0
+offset_right = 117.0
+offset_bottom = 1070.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+offset_left = 6.0
+offset_top = 924.0
+offset_right = 116.0
+offset_bottom = 993.0
+text = "Join"
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

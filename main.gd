@@ -12,7 +12,7 @@ func _on_host_pressed() -> void:
 	
 
 func _on_join_pressed() -> void:
-	peer.create_client("127.0.0.1",1207)
+	peer.create_client("localhost",1207)
 	multiplayer.multiplayer_peer = peer
 	
 	
