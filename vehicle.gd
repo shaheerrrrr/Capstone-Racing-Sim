@@ -22,8 +22,9 @@ var look_at
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	look_at = global_position
+	camera_3d = is_multiplayer_authority()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -90,7 +91,6 @@ func _getSpeed() -> int:
 	return speed
 func _setSpeed(s: int) -> void:
 	speed = s
-
 func _start() -> void:
 	start = true
 
