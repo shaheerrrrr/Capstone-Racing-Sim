@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dq86uxaadbax4"]
 
-[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="1_k2ky8"]
+[ext_resource type="PackedScene" path="res://Vehicle.tscn" id="1_k2ky8"]
 
 [sub_resource type="GDScript" id="GDScript_2tnjd"]
 
@@ -16,7 +16,6 @@ properties/1/replication_mode = 1
 script = SubResource("GDScript_2tnjd")
 
 [node name="Vehicle" parent="." instance=ExtResource("1_k2ky8")]
-mass = 150.0
 contact_monitor = true
 max_contacts_reported = 1
 

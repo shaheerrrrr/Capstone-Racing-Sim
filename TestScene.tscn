@@ -1,13 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bik5xvwjwnnpd"]
+[gd_scene load_steps=14 format=3 uid="uid://cs757hia37qho"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_vsrga"]
-[ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
-[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="4_5q17w"]
-[ext_resource type="PackedScene" uid="uid://1pmwxoetldb4" path="res://lap_coutner.tscn" id="5_i5q3w"]
-[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="6_dcwtx"]
-[ext_resource type="Script" path="res://timer.gd" id="6_gs6f5"]
-[ext_resource type="Script" path="res://countdown.gd" id="6_ifh1t"]
-[ext_resource type="Script" path="res://speedometer.gd" id="7_ksie6"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_vsrga"]
+[ext_resource type="PackedScene" uid="uid://4hqyrtbh7lx4" path="res://TestMap.tscn" id="2_gfnct"]
+[ext_resource type="Script" path="res://Scripts/timer.gd" id="2_wwcom"]
+[ext_resource type="Script" path="res://Scripts/speedometer.gd" id="3_u5m6h"]
+[ext_resource type="PackedScene" uid="uid://cyuhvpsm6nhwt" path="res://pause_screen.tscn" id="3_yjc56"]
+[ext_resource type="PackedScene" uid="uid://6nq43mymfein" path="res://Vehicle.tscn" id="4_5q17w"]
+[ext_resource type="Script" path="res://Scripts/finishline.gd" id="8_vcls1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yrsft"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,73 +21,49 @@ sky = SubResource("Sky_007pn")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="GDScript" id="GDScript_qvesi"]
+script/source = "extends Label
+
+var time_elapsed := 0.0
+var is_stopped := false
+
+@onready var player = $\"../Player\"
+func _process(delta: float) -> void:
+	time_elapsed += delta
+	if time_elapsed <= 3:
+		text = str(4 - time_elapsed).pad_decimals(0)
+	else:
+		#resume()
+		text = \"\"
+		queue_free()
+
+func reset() -> void:
+	time_elapsed = 0.0
+	is_stopped = false
+	#pause() 
+
+func stop() -> void:
+	is_stopped = true
+
+#
+#func resume():
+	#player.start()	
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_oq2qt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cm21y"]
+size = Vector3(90.1957, 1, 1)
+
+[node name="Node3D2" type="Node3D"]
 script = ExtResource("1_vsrga")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_24ss8")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
-[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.353, 0.0560065, -27.1763)
-
-[node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
-visible = false
-
 [node name="Vehicle" parent="." instance=ExtResource("4_5q17w")]
-
-[node name="timer" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.032
-offset_left = -51.5
-offset_top = 75.0
-offset_right = 51.5
-offset_bottom = 34.44
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
-text = "0.00"
-script = ExtResource("6_gs6f5")
-
-[node name="speedometer" type="Label" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -159.0
-offset_top = -56.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "0 MPH"
-script = ExtResource("7_ksie6")
-
-[node name="coutndown" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.5
-offset_top = -78.0
-offset_right = 143.5
-offset_bottom = 78.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Placeholder"
-horizontal_alignment = 1
-script = ExtResource("6_ifh1t")
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0.9523, -1.72748)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("6_dcwtx")]
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("3_yjc56")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -97,5 +72,86 @@ grow_vertical = 1
 metadata/_edit_group_ = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player.tscn")
 spawn_path = NodePath("..")
+
+[node name="Borders" type="Node3D" parent="."]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_24ss8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Sketchfab_Scene2" parent="Map" instance=ExtResource("2_gfnct")]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="timer" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.032
+offset_left = 888.5
+offset_top = 75.0
+offset_right = 991.5
+offset_bottom = 142.72
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "0.00"
+script = ExtResource("2_wwcom")
+
+[node name="speedometer" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1721.0
+offset_top = 984.0
+offset_right = 1880.0
+offset_bottom = 1040.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "0 MPH"
+script = ExtResource("3_u5m6h")
+
+[node name="coutndown" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 796.5
+offset_top = 442.0
+offset_right = 1083.5
+offset_bottom = 598.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Placeholder"
+horizontal_alignment = 1
+script = SubResource("GDScript_qvesi")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.90141, -0.138113, 170.062)
+script = ExtResource("8_vcls1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, -2.74088, 0, 0)
+mesh = SubResource("BoxMesh_oq2qt")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74088, 0, 0)
+shape = SubResource("BoxShape3D_cm21y")

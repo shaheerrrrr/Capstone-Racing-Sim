@@ -1,10 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://devu25awtav2b"]
+[gd_scene load_steps=7 format=3 uid="uid://cyuhvpsm6nhwt"]
 
-[ext_resource type="Script" path="res://pause_screen.gd" id="1_cuenl"]
-[ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_m76nj"]
+[ext_resource type="Script" path="res://Scripts/pause_screen.gd" id="1_wa0e2"]
+
+[sub_resource type="Shader" id="Shader_tyhqg"]
+code = "shader_type canvas_item;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+uniform float lod: hint_range(0.0, 5) = 0.0;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dcqc8"]
-shader = ExtResource("2_m76nj")
+shader = SubResource("Shader_tyhqg")
 shader_parameter/lod = 0.0
 
 [sub_resource type="Animation" id="Animation_ahnbe"]
@@ -76,7 +87,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_cuenl")
+script = ExtResource("1_wa0e2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_dcqc8")

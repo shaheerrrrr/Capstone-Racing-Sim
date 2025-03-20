@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rjjf1p42w4xn"
-path.s3tc="res://.godot/imported/tree_animate_7.png-101069da2116f9a35a5538350dd8e872.s3tc.ctex"
+uid="uid://cy3ovu7jlvrg5"
+path.s3tc="res://.godot/imported/panoramic-black-white-chess-pattern_295303-1340.jpg-dff562b2b9ed6891787c5e462fdcfea3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Tree/tree_animate_7.png"
-dest_files=["res://.godot/imported/tree_animate_7.png-101069da2116f9a35a5538350dd8e872.s3tc.ctex"]
+source_file="res://Textures/panoramic-black-white-chess-pattern_295303-1340.jpg"
+dest_files=["res://.godot/imported/panoramic-black-white-chess-pattern_295303-1340.jpg-dff562b2b9ed6891787c5e462fdcfea3.s3tc.ctex"]
 
 [params]
 

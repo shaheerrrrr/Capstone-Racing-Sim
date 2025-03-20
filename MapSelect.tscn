@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo7xdb16udv7w"]
+[gd_scene load_steps=2 format=3 uid="uid://8pxthk0m40qn"]
 
-[ext_resource type="Script" path="res://MapSelect.gd" id="1_1mi5l"]
+[ext_resource type="Script" path="res://Scripts/map_select.gd" id="1_4ih2g"]
 
 [node name="MapSelect" type="Control"]
 layout_mode = 3
@@ -13,7 +13,7 @@ offset_right = 5.0
 offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1mi5l")
+script = ExtResource("1_4ih2g")
 
 [node name="Map1" type="Button" parent="."]
 layout_mode = 1

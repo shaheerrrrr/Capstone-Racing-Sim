@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0gn2snv0l801"]
+[gd_scene load_steps=10 format=3 uid="uid://4hqyrtbh7lx4"]
 
 [ext_resource type="PackedScene" uid="uid://k4s3ym6lpp7t" path="res://Assets/tracks/race_track__low_poly.glb" id="1_yt22e"]
 [ext_resource type="Texture2D" uid="uid://bx21adk0yfadx" path="res://grass03.png" id="2_jsaf6"]
