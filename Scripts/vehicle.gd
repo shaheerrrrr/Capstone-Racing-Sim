@@ -19,8 +19,7 @@ var start = false
 @onready var backRight_wheel = $"Back Right"
 @onready var frontLeft_wheel = $"Front Left"
 @onready var timer = $timer
-var time_elapsed := 0.0
-
+var time_elapsed = 0
 var look_at
 # Store camera position when finishing
 var finish_camera_position = null
@@ -28,7 +27,7 @@ var finish_camera_rotation = null
 var finish_camera_basis = null
 
 
-# Initialize the vehicle
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("player")  # Add vehicle to player group for finish line detection
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -93,14 +92,27 @@ func _physics_process(delta: float) -> void:
 	time_elapsed += delta
 	if (Input.is_action_just_pressed("move_forward") || Input.is_action_just_pressed("move_backwards") || Input.is_action_just_pressed("move_left") || Input.is_action_just_pressed("move_right")) && time_elapsed > 3:
 		start = true
-
 func _drift():
-	target_back_friction = backwheeldrift
-	target_front_friction = frontwheeldrift
-
+	backLeft_wheel.wheel_friction_slip = backwheeldrift
+	backRight_wheel.wheel_friction_slip = backwheeldrift
+	frontRight_wheel.wheel_friction_slip = frontwheeldrift
+	frontLeft_wheel.wheel_friction_slip = frontwheeldrift
+	#print("Drifting")
+	
 func _stop_drift():
-	target_back_friction = normal_friction_slip
-	target_front_friction = normal_friction_slip
+	backLeft_wheel.wheel_friction_slip = normal_friction_slip
+	backRight_wheel.wheel_friction_slip = normal_friction_slip
+	frontRight_wheel.wheel_friction_slip = normal_friction_slip
+	frontLeft_wheel.wheel_friction_slip = normal_friction_slip
+	#print("Stop Drifting")
+	
+
+func _fix_stuck():
+	var transform = global_transform
+	transform.origin.x += 5*reverse_camera.position
+	transform.origin.y += 5
+	transform.basis = Basis()
+	global_transform = transform
 
 func _check_camera_switch():
 	if Input.is_action_just_pressed("perspective_change"):
@@ -108,7 +120,6 @@ func _check_camera_switch():
 			reverse_camera.current = true
 		else:
 			camera_3d.current = true
-
 func _flip_vehicle():
 	if is_upside_down():
 		var transform = global_transform
@@ -123,8 +134,7 @@ func is_upside_down() -> bool:
 func is_on_grass() -> bool:
 	return false 
 
-# Finish line detection
-func _on_Player_body_entered(body):
+func _on_Player_body_entered(body):	
 	var bodyName = body.getName()
 	if bodyName == "Finishline":
 		finished = true

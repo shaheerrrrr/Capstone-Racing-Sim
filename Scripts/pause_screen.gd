@@ -1,4 +1,5 @@
 extends Control
+@onready var main = $main
 
 func _ready():
 	$AnimationPlayer.play("RESET")
@@ -6,12 +7,12 @@ func _ready():
 func resume():
 	get_tree().paused = false
 	$AnimationPlayer.play_backwards("blur")
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func pause():
 	get_tree().paused = true
 	$AnimationPlayer.play("blur")
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func testEsc():
 	if Input.is_action_just_pressed("escape") and get_tree().paused == false:

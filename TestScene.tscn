@@ -57,6 +57,7 @@ size = Vector3(90.1957, 1, 1)
 
 [node name="Node3D2" type="Node3D"]
 script = ExtResource("1_vsrga")
+player_scene = ExtResource("2_laxwu")
 
 [node name="Vehicle" parent="." instance=ExtResource("4_5q17w")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0.9523, -1.72748)

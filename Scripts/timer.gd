@@ -1,4 +1,4 @@
-extends Label
+extends Label 
 
 var time_elapsed := 0.0
 var is_stopped := false
@@ -15,7 +15,6 @@ func _process(delta: float) -> void:
 	time_elapsed += delta
 	if time_elapsed > 3:
 		go = true
-
 
 func reset() -> void:
 	time_elapsed = 0.0
