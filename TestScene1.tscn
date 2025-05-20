@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bncj6afx4j4bb"]
+[gd_scene load_steps=12 format=3 uid="uid://bncj6afx4j4bb"]
 
 [ext_resource type="PackedScene" uid="uid://b7utbcceih2l1" path="res://Wamp Wamp.tscn" id="1_o6ypu"]
 [ext_resource type="PackedScene" uid="uid://6nq43mymfein" path="res://Vehicle.tscn" id="2_rtiqu"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/speedometer.gd" id="4_4hfo3"]
 [ext_resource type="Script" path="res://Scripts/countdown.gd" id="5_orono"]
 [ext_resource type="PackedScene" uid="uid://cyuhvpsm6nhwt" path="res://pause_screen.tscn" id="6_i37wo"]
+[ext_resource type="Script" path="res://Scripts/finishline.gd" id="7_godbw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4l2r"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,10 +21,13 @@ sky = SubResource("Sky_o1pwn")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_o1xoa"]
+size = Vector3(54.2637, 1, 1)
+
 [node name="TestScene1" type="Node3D"]
 
 [node name="Vehicle" parent="." instance=ExtResource("2_rtiqu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 276.277, 48.4546, 136.371)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 175.39, 45.394, 60.135)
 center_of_mass = Vector3(0, -0.02, -0.25)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -40,6 +44,20 @@ metadata/_edit_group_ = true
 spawn_path = NodePath("..")
 
 [node name="Borders" type="Node3D" parent="."]
+
+[node name="speedometer" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "0 MPH"
+script = ExtResource("4_4hfo3")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -61,23 +79,6 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
 text = "0.00"
 script = ExtResource("3_fues2")
-
-[node name="speedometer" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1721.0
-offset_top = 984.0
-offset_right = 1880.0
-offset_bottom = 1040.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "0 MPH"
-script = ExtResource("4_4hfo3")
 
 [node name="coutndown" type="Label" parent="UI"]
 layout_mode = 1
@@ -107,4 +108,16 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 shadow_enabled = true
 
 [node name="Sketchfab_Scene" parent="Map" instance=ExtResource("1_o6ypu")]
-transform = Transform3D(160, 0, 0, 0, 160, 0, 0, 0, 160, -1315.24, 0.0427246, -1247.42)
+transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -1315.24, 0.0427246, -1247.42)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 192.991, 43.6598, 294.954)
+script = ExtResource("7_godbw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 18.9879, 1.62886, 141.47)
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 1.6308, 141.434)
+shape = SubResource("BoxShape3D_o1xoa")

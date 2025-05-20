@@ -1,13 +1,14 @@
 extends Area3D
 
 signal race_finished
+signal lap_count_changed(new_count: int)
 
 @export var victory_message: String = "Finish!"
 @export var display_time: float = 3.0
 @export var slow_down_rate: float = 0.95
 @export var stopwatch_path: NodePath
-
 @export var ui_label_path: NodePath
+@export var forward_direction: Vector3 = Vector3.FORWARD
 
 var _ui_label = null
 var _timer = null
@@ -41,34 +42,48 @@ func _on_body_entered(body):
 	print("Body entered finish line: ", body.name)
 	
 	if body.is_in_group("player") or body is VehicleBody3D:
-		print("Player detected at finish line!")
+		var velocity_direction = body.linear_velocity.normalized()
+		var global_forward = global_transform.basis * forward_direction
+		var dot_product = velocity_direction.dot(global_forward)
 		
-		_winning_vehicle = body
-		
-		if body.has_method("finish_race"):
-			body.finish_race()
-		
-		_slowing_down = true
-		
-		# Stop the stopwatch timer
-		if _stopwatch and _stopwatch.has_method("stop"):
-			_stopwatch.stop()
-			print("Stopwatch stopped at: ", _stopwatch.text)
-		
-		# Alternatively, if the timer is on the vehicle
-		if body.has_node("timer") and body.get_node("timer").has_method("stop"):
-			body.get_node("timer").stop()
-			print("Vehicle timer stopped")
-		
-		if _ui_label:
-			_ui_label.text = victory_message
-			_ui_label.visible = true
-		
-		race_finished.emit()
-		
-		_timer.start()
-		
-		print("Finish line reached!")
+		if dot_product > 0.5:
+			print("Player detected at finish line - correct direction!")
+			if body.has_method("add_lap"):
+				body.add_lap()
+				lap_count_changed.emit(body.get_current_lap())
+				
+				if body.has_method("get_current_lap") and body.has_method("get_total_laps"):
+					var current_lap = body.get_current_lap()
+					var total_laps = body.get_total_laps()
+					
+					if current_lap >= total_laps:
+						print("Race completed!")
+						_winning_vehicle = body
+						
+						if body.has_method("finish_race"):
+							body.finish_race()
+						
+						_slowing_down = true
+						
+						if _stopwatch and _stopwatch.has_method("stop"):
+							_stopwatch.stop()
+							print("Stopwatch stopped at: ", _stopwatch.text)
+						
+						if body.has_node("timer") and body.get_node("timer").has_method("stop"):
+							body.get_node("timer").stop()
+							print("Vehicle timer stopped")
+						
+						if _ui_label:
+							_ui_label.text = victory_message
+							_ui_label.visible = true
+						
+						race_finished.emit()
+						_timer.start()
+		else:
+			print("Player detected at finish line - wrong direction!")
+			if body.has_method("subtract_lap"):
+				body.subtract_lap()
+				lap_count_changed.emit(body.get_current_lap())
 
 func _on_timer_timeout():
 	if _ui_label:

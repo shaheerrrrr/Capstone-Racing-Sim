@@ -2,15 +2,18 @@ extends VehicleBody3D
 
 # Constants and variables
 const MAX_STEER = 0.8
-const ENGINE_POWER = 800
+const ENGINE_POWER = 1000
 var normal_friction_slip = 1.0
-var backwheeldrift = 0.85
+var backwheeldrift = 0.8
 var frontwheeldrift = 0.9 
 var target_back_friction = normal_friction_slip
 var target_front_friction = normal_friction_slip
 var speed = 0
 var finished = false
 var start = false
+var current_lap = 0
+var checkpoints := []
+var total_laps = 2
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera
 @onready var reverse_camera = $CameraPivot/ReverseCamera
@@ -18,7 +21,13 @@ var start = false
 @onready var frontRight_wheel = $"Front Right"
 @onready var backRight_wheel = $"Back Right"
 @onready var frontLeft_wheel = $"Front Left"
+<<<<<<< Updated upstream
 @onready var timer = $timer
+=======
+@onready var timer = $"../UI/timer"
+
+
+>>>>>>> Stashed changes
 var time_elapsed = 0
 var look_at
 # Store camera position when finishing
@@ -26,18 +35,24 @@ var finish_camera_position = null
 var finish_camera_rotation = null
 var finish_camera_basis = null
 
+var drift_trail_scene = preload("res://Scripts/drift_trail.gd")
+var left_trail: Node3D = null
+var right_trail: Node3D = null
+var trail_update_timer: float = 0.0
+const TRAIL_UPDATE_INTERVAL: float = 0.05  # Update trail every 50ms
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	add_to_group("player")  # Add vehicle to player group for finish line detection
+	checkpoints.resize(45)
+	checkpoints.fill(false)
+	add_to_group("player") 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	look_at = global_position
-	# Adjust suspension properties for better handling
 
 # Handle physics updates
 func _physics_process(delta: float) -> void:
+	speed = linear_velocity.length() * 3.6  
+	
 	if start and not finished:
-		# Improved steering with sensitivity curve
 		var steer_input = Input.get_axis("move_right", "move_left")
 		var steer_target = steer_input * MAX_STEER * (1 - abs(steer_input) * 0.5)
 		steering = move_toward(steering, steer_target, delta * 20 * 4)
@@ -49,33 +64,33 @@ func _physics_process(delta: float) -> void:
 		else:
 			brake = 0
 	else:
-		if not finished:  # Only apply brake if not finished
+		if finished:
+			#print(checkpoints)
 			brake = 1000
 	
-	# Update camera position based on whether race is finished
 	if not finished:
-		# Normal camera behavior - follows the vehicle
 		camera_pivot.global_position = camera_pivot.global_position.lerp(global_position, delta * 20.0)
 		camera_pivot.transform = camera_pivot.transform.interpolate_with(transform, delta * 5.0)
 		look_at = look_at.lerp(global_position + linear_velocity, delta * 5.0)
 	else:
-		# After finish - camera stays fixed at finish position with fixed rotation
 		if finish_camera_position != null:
-			# Keep camera at finish position
 			camera_pivot.global_position = finish_camera_position
 			
-			# Keep the same rotation as when crossing the finish line
 			if finish_camera_basis != null:
 				camera_pivot.global_basis = finish_camera_basis
 	
-	if not finished:  # Only allow these actions if not finished
+	if not finished:  
 		_check_camera_switch()
 		if Input.is_action_just_pressed("flip_vehicle"):
 			_flip_vehicle()
 		if Input.is_action_pressed("is_drifting"):
 			_drift()
+			_update_drift_trails(delta)
 		else:
 			_stop_drift()
+			_clear_drift_trails()
+	if not start:
+		brake = 1000
 
 	backLeft_wheel.wheel_friction_slip = lerp(backLeft_wheel.wheel_friction_slip, target_back_friction, delta * 10)
 	backRight_wheel.wheel_friction_slip = lerp(backRight_wheel.wheel_friction_slip, target_back_friction, delta * 10)
@@ -92,20 +107,44 @@ func _physics_process(delta: float) -> void:
 	time_elapsed += delta
 	if (Input.is_action_just_pressed("move_forward") || Input.is_action_just_pressed("move_backwards") || Input.is_action_just_pressed("move_left") || Input.is_action_just_pressed("move_right")) && time_elapsed > 3:
 		start = true
+
 func _drift():
 	backLeft_wheel.wheel_friction_slip = backwheeldrift
 	backRight_wheel.wheel_friction_slip = backwheeldrift
 	frontRight_wheel.wheel_friction_slip = frontwheeldrift
 	frontLeft_wheel.wheel_friction_slip = frontwheeldrift
-	#print("Drifting")
 	
+	# Create trails if they don't exist
+	if not left_trail:
+		left_trail = drift_trail_scene.new()
+		get_parent().add_child(left_trail)
+	if not right_trail:
+		right_trail = drift_trail_scene.new()
+		get_parent().add_child(right_trail)
+
 func _stop_drift():
 	backLeft_wheel.wheel_friction_slip = normal_friction_slip
 	backRight_wheel.wheel_friction_slip = normal_friction_slip
 	frontRight_wheel.wheel_friction_slip = normal_friction_slip
 	frontLeft_wheel.wheel_friction_slip = normal_friction_slip
-	#print("Stop Drifting")
-	
+
+func _clear_drift_trails():
+	if left_trail:
+		left_trail.queue_free()
+		left_trail = null
+	if right_trail:
+		right_trail.queue_free()
+		right_trail = null
+
+func _update_drift_trails(delta: float) -> void:
+	trail_update_timer += delta
+	if trail_update_timer >= TRAIL_UPDATE_INTERVAL:
+		trail_update_timer = 0.0
+		
+		if left_trail:
+			left_trail.add_point(backLeft_wheel.global_position)
+		if right_trail:
+			right_trail.add_point(backRight_wheel.global_position)
 
 func _fix_stuck():
 	var transform = global_transform
@@ -154,3 +193,27 @@ func finish_race():
 	print("Vehicle marked as finished!")
 	# Show mouse cursor when race is finished
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func add_lap():
+	current_lap += 1
+	print("Lap completed! Current lap: ", current_lap, " / ", total_laps)
+	if current_lap >= total_laps:
+		finish_race()
+
+func subtract_lap():
+	current_lap -= 1
+	print("Lap subtracted! Current lap: ", current_lap, " / ", total_laps)
+
+func get_current_lap() -> int:
+	return current_lap
+
+func get_total_laps() -> int:
+	return total_laps
+	
+
+func setCheckpoint(i: int) -> void:
+	if i >= 0 and i < checkpoints.size():
+		checkpoints[i-1] = true
+		print(i-1)
+	else:
+		push_error("Checkpoint index out of bounds: " + str(i))
