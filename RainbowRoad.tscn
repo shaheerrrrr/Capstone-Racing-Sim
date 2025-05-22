@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvsxymkt8atgh"]
+
+[ext_resource type="PackedScene" uid="uid://c8cb7wirrcevk" path="res://RainbowRoadd.tscn" id="1_l5jxy"]
+[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="2_ort0o"]
+[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="3_vw8sl"]
+[ext_resource type="Script" path="res://Scripts/speedometer.gd" id="4_ih6s3"]
+[ext_resource type="Script" path="res://Scripts/timer.gd" id="5_u43mh"]
+[ext_resource type="Script" path="res://Scripts/countdown.gd" id="6_4uutf"]
+[ext_resource type="Script" path="res://Scripts/finishline.gd" id="7_8rfse"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x06ty"]
+size = Vector3(54.2637, 1, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lu3d8"]
+sky_top_color = Color(0.139441, 0.174433, 0.223096, 1)
+sky_horizon_color = Color(0.0568285, 0.0593803, 0.0634085, 1)
+ground_bottom_color = Color(0.0184287, 0.0134493, 0.00877622, 1)
+ground_horizon_color = Color(0.0568285, 0.0593803, 0.0634085, 1)
+
+[sub_resource type="Sky" id="Sky_oyr3h"]
+sky_material = SubResource("ProceduralSkyMaterial_lu3d8")
+
+[sub_resource type="Environment" id="Environment_pgv32"]
+background_mode = 2
+sky = SubResource("Sky_oyr3h")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Vehicle" parent="." instance=ExtResource("2_ort0o")]
+transform = Transform3D(0.999707, 0, -0.024188, 0, 1, 0, 0.024188, 0, 0.999707, 26.3806, 178.147, -0.552338)
+center_of_mass = Vector3(0, -0.02, -0.25)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("3_vw8sl")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_group_ = true
+
+[node name="speedometer" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "0 MPH"
+script = ExtResource("4_ih6s3")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="timer" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.032
+offset_left = 888.5
+offset_top = 75.0
+offset_right = 991.5
+offset_bottom = 142.72
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "0.00"
+script = ExtResource("5_u43mh")
+
+[node name="coutndown" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 796.5
+offset_top = 442.0
+offset_right = 1083.5
+offset_bottom = 598.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "3
+"
+horizontal_alignment = 1
+script = ExtResource("6_4uutf")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-0.75, 0, -1.13247e-07, 0, 0.75, 0, 1.13247e-07, 0, -0.75, 32.2066, 142.815, 127.87)
+script = ExtResource("7_8rfse")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 18.9879, 1.62886, 141.47)
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 1.6308, 141.434)
+shape = SubResource("BoxShape3D_x06ty")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Sketchfab_Scene" parent="Map" instance=ExtResource("1_l5jxy")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 19.7993, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_pgv32")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true

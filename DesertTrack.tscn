@@ -1,0 +1,125 @@
+[gd_scene load_steps=13 format=3 uid="uid://com2wo41omabk"]
+
+[ext_resource type="PackedScene" uid="uid://dtmo5dxguumuv" path="res://DessertTrack.tscn" id="1_up1t8"]
+[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="2_4vb0v"]
+[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="3_jmxii"]
+[ext_resource type="Script" path="res://Scripts/speedometer.gd" id="4_nn60i"]
+[ext_resource type="Script" path="res://Scripts/timer.gd" id="5_3yha0"]
+[ext_resource type="Script" path="res://Scripts/countdown.gd" id="6_82ckw"]
+[ext_resource type="Script" path="res://Scripts/finishline.gd" id="7_4dcv8"]
+[ext_resource type="PackedScene" uid="uid://dashodovitq7o" path="res://Assets/finish_line.glb" id="8_xds3h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pugwp"]
+size = Vector3(54.2637, 1, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w7o2q"]
+sky_top_color = Color(0.195466, 0.239909, 0.301718, 1)
+sky_horizon_color = Color(0.176526, 0.181718, 0.189915, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_007pn"]
+sky_material = SubResource("ProceduralSkyMaterial_w7o2q")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_g8okv"]
+background_mode = 2
+sky = SubResource("Sky_007pn")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Vehicle" parent="." instance=ExtResource("2_4vb0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1823, 6.17359, 59.2282)
+center_of_mass = Vector3(0, -0.02, -0.25)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("3_jmxii")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_group_ = true
+
+[node name="speedometer" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "0 MPH"
+script = ExtResource("4_nn60i")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="timer" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.032
+offset_left = 888.5
+offset_top = 75.0
+offset_right = 991.5
+offset_bottom = 142.72
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "0.00"
+script = ExtResource("5_3yha0")
+
+[node name="coutndown" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 796.5
+offset_top = 442.0
+offset_right = 1083.5
+offset_bottom = 598.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "3
+"
+horizontal_alignment = 1
+script = ExtResource("6_82ckw")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-0.85, 0, -1.28346e-07, 0, 0.85, 0, 1.28346e-07, 0, -0.85, 40.3633, 9.02956, 195.956)
+script = ExtResource("7_4dcv8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 18.9879, 1.62886, 141.47)
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 1.6308, 141.434)
+shape = SubResource("BoxShape3D_pugwp")
+
+[node name="Sketchfab_Scene" parent="Area3D" instance=ExtResource("8_xds3h")]
+transform = Transform3D(3.75, 0, 0, 0, 3.75, 0, 0, 0, 3.75, 10.9714, -8.74109, 141.313)
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="DesertTrack" parent="Map" instance=ExtResource("1_up1t8")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_g8okv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true

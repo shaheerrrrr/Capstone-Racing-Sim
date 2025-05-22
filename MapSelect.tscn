@@ -82,5 +82,7 @@ theme_override_font_sizes/font_size = 50
 text = "Map 4"
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Map1" to="." method="_on_Map1_button_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/Map2" to="." method="onMap2Pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Map1" to="." method="_on_map_1_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Map3" to="." method="_on_map_3_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/Map2" to="." method="_on_map_2_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/Map4" to="." method="_on_map_4_pressed"]

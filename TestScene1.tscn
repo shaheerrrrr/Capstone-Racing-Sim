@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bncj6afx4j4bb"]
+[gd_scene load_steps=14 format=3 uid="uid://d1pp36fqf63li"]
 
 [ext_resource type="PackedScene" uid="uid://b7utbcceih2l1" path="res://Wamp Wamp.tscn" id="1_o6ypu"]
-[ext_resource type="PackedScene" uid="uid://6nq43mymfein" path="res://Vehicle.tscn" id="2_rtiqu"]
+[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="2_rtiqu"]
 [ext_resource type="Script" path="res://Scripts/timer.gd" id="3_fues2"]
 [ext_resource type="Script" path="res://Scripts/speedometer.gd" id="4_4hfo3"]
 [ext_resource type="Script" path="res://Scripts/countdown.gd" id="5_orono"]
-[ext_resource type="PackedScene" uid="uid://cyuhvpsm6nhwt" path="res://pause_screen.tscn" id="6_i37wo"]
+[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="6_i37wo"]
 [ext_resource type="Script" path="res://Scripts/finishline.gd" id="7_godbw"]
 [ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="8_sv85y"]
 
@@ -30,46 +30,9 @@ size = Vector3(54.2637, 1, 1)
 
 [node name="TestScene1" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_na5qw")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
-[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_o6ypu")]
-transform = Transform3D(140, 0, 0, 0, 140, 0, 0, 0, 140, -1315.24, 0.0427246, -1247.42)
-
-[node name="timer" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.032
-offset_left = -51.5
-offset_top = 75.0
-offset_right = 51.5
-offset_bottom = 34.44
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
-text = "0.00"
-script = ExtResource("3_g0ts6")
-
-[node name="coutndown" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.5
-offset_top = -78.0
-offset_right = 143.5
-offset_bottom = 78.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Placeholder"
-horizontal_alignment = 1
-script = ExtResource("5_orono")
+[node name="Vehicle" parent="." instance=ExtResource("2_rtiqu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 175.39, 45.394, 60.135)
+center_of_mass = Vector3(0, -0.02, -0.25)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -81,7 +44,10 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_group_ = true
 
-[node name="Player" parent="." instance=ExtResource("6_mbuvj")]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[node name="Borders" type="Node3D" parent="."]
 
 [node name="speedometer" type="Label" parent="."]
 anchors_preset = 3
