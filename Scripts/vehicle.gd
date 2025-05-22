@@ -21,16 +21,11 @@ var total_laps = 2
 @onready var frontRight_wheel = $"Front Right"
 @onready var backRight_wheel = $"Back Right"
 @onready var frontLeft_wheel = $"Front Left"
-<<<<<<< Updated upstream
-@onready var timer = $timer
-=======
 @onready var timer = $"../UI/timer"
 
 
->>>>>>> Stashed changes
 var time_elapsed = 0
 var look_at
-# Store camera position when finishing
 var finish_camera_position = null
 var finish_camera_rotation = null
 var finish_camera_basis = null
@@ -39,7 +34,7 @@ var drift_trail_scene = preload("res://Scripts/drift_trail.gd")
 var left_trail: Node3D = null
 var right_trail: Node3D = null
 var trail_update_timer: float = 0.0
-const TRAIL_UPDATE_INTERVAL: float = 0.05  # Update trail every 50ms
+const TRAIL_UPDATE_INTERVAL: float = 0.05  #
 
 func _ready() -> void:
 	checkpoints.resize(45)
@@ -48,7 +43,6 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	look_at = global_position
 
-# Handle physics updates
 func _physics_process(delta: float) -> void:
 	speed = linear_velocity.length() * 3.6  
 	
@@ -58,7 +52,6 @@ func _physics_process(delta: float) -> void:
 		steering = move_toward(steering, steer_target, delta * 20 * 4)
 		engine_force = Input.get_axis("move_forward", "move_backwards") * ENGINE_POWER
 
-		# Braking
 		if Input.is_action_pressed("brake"):
 			brake = 20
 		else:
@@ -90,7 +83,7 @@ func _physics_process(delta: float) -> void:
 			_stop_drift()
 			_clear_drift_trails()
 	if not start:
-		brake = 1000
+		brake = 100000
 
 	backLeft_wheel.wheel_friction_slip = lerp(backLeft_wheel.wheel_friction_slip, target_back_friction, delta * 10)
 	backRight_wheel.wheel_friction_slip = lerp(backRight_wheel.wheel_friction_slip, target_back_friction, delta * 10)
@@ -114,7 +107,6 @@ func _drift():
 	frontRight_wheel.wheel_friction_slip = frontwheeldrift
 	frontLeft_wheel.wheel_friction_slip = frontwheeldrift
 	
-	# Create trails if they don't exist
 	if not left_trail:
 		left_trail = drift_trail_scene.new()
 		get_parent().add_child(left_trail)
@@ -191,6 +183,7 @@ func finish_race():
 	finish_camera_rotation = camera_pivot.rotation
 	finish_camera_basis = camera_pivot.global_basis
 	print("Vehicle marked as finished!")
+	timer.stop()
 	# Show mouse cursor when race is finished
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 

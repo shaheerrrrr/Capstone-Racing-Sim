@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=14 format=3 uid="uid://cs757hia37qho"]
-=======
-[gd_scene load_steps=17 format=3 uid="uid://bik5xvwjwnnpd"]
->>>>>>> Stashed changes
+[gd_scene load_steps=18 format=3 uid="uid://bik5xvwjwnnpd"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_vsrga"]
 [ext_resource type="PackedScene" uid="uid://4hqyrtbh7lx4" path="res://TestMap.tscn" id="2_gfnct"]
@@ -10,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/speedometer.gd" id="3_u5m6h"]
 [ext_resource type="PackedScene" uid="uid://cyuhvpsm6nhwt" path="res://pause_screen.tscn" id="3_yjc56"]
 [ext_resource type="PackedScene" uid="uid://6nq43mymfein" path="res://Vehicle.tscn" id="4_5q17w"]
+[ext_resource type="PackedScene" uid="uid://bvp07nbb58rkr" path="res://Assets/bush.glb" id="5_7gcc0"]
 [ext_resource type="PackedScene" uid="uid://dashodovitq7o" path="res://Assets/finish_line.glb" id="8_gh8wk"]
 [ext_resource type="Script" path="res://Scripts/finishline.gd" id="8_vcls1"]
 [ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="9_55y3f"]
@@ -35,7 +32,7 @@ script/source = "extends Label
 var time_elapsed := 0.0
 var is_stopped := false
 
-@onready var player = $\"../Player\"
+@onready var player = $\"../Vehicle\"
 func _process(delta: float) -> void:
 	time_elapsed += delta
 	if time_elapsed <= 3:
@@ -62,8 +59,8 @@ func stop() -> void:
 size = Vector3(54.2637, 1, 1)
 
 [node name="Node3D2" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.282898, 3.8147e-06, -0.00498199)
 script = ExtResource("1_vsrga")
-player_scene = ExtResource("2_laxwu")
 
 [node name="Vehicle" parent="." instance=ExtResource("4_5q17w")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.91519, 0.9523, -104.348)
@@ -95,6 +92,36 @@ shadow_enabled = true
 [node name="Sketchfab_Scene2" parent="Map" instance=ExtResource("2_gfnct")]
 transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
 
+[node name="Sketchfab_Scene" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 124.814, -0.226743, -25.6165)
+
+[node name="Sketchfab_Scene3" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 74.988, -0.226743, -85.4173)
+
+[node name="Sketchfab_Scene4" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 177.034, -0.226743, -26.7021)
+
+[node name="Sketchfab_Scene5" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 141.391, -0.226743, -58.3286)
+
+[node name="Sketchfab_Scene6" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 67.7022, 1.73258, -121.476)
+
+[node name="Sketchfab_Scene7" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 94.8296, 2.10399, -42.3955)
+
+[node name="Sketchfab_Scene8" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 167.154, -0.226743, -102.136)
+
+[node name="Sketchfab_Scene9" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 103.229, 1.94829, -86.2804)
+
+[node name="Sketchfab_Scene10" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 135.821, 0.282119, -116.458)
+
+[node name="Sketchfab_Scene11" parent="Map" instance=ExtResource("5_7gcc0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 61.347, -0.226743, -22.0003)
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -116,28 +143,7 @@ theme_override_font_sizes/font_size = 50
 text = "0.00"
 script = ExtResource("2_wwcom")
 
-<<<<<<< Updated upstream
-[node name="speedometer" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1721.0
-offset_top = 984.0
-offset_right = 1880.0
-offset_bottom = 1040.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "0 MPH"
-script = ExtResource("3_u5m6h")
-
-[node name="coutndown" type="Label" parent="UI"]
-=======
 [node name="countdown" type="Label" parent="UI"]
->>>>>>> Stashed changes
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -151,7 +157,8 @@ offset_bottom = 598.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
-text = "Placeholder"
+text = "3
+"
 horizontal_alignment = 1
 script = SubResource("GDScript_qvesi")
 
@@ -172,18 +179,6 @@ text = "0 MPH"
 script = ExtResource("3_u5m6h")
 
 [node name="Area3D" type="Area3D" parent="."]
-<<<<<<< Updated upstream
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.90141, -0.138113, 170.062)
-script = ExtResource("8_vcls1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, -2.74088, 0, 0)
-mesh = SubResource("BoxMesh_oq2qt")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74088, 0, 0)
-=======
 transform = Transform3D(-1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 16.7191, -0.138, 131.133)
 script = ExtResource("8_vcls1")
 
@@ -649,5 +644,4 @@ script = ExtResource("9_55y3f")
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint45"]
->>>>>>> Stashed changes
 shape = SubResource("BoxShape3D_cm21y")
