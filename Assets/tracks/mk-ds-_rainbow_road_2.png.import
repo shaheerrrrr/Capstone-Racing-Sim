@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfhgv4qi12t7j"
+uid="uid://dnm40jq4ih3bv"
 path.s3tc="res://.godot/imported/mk-ds-_rainbow_road_2.png-9f3ab7c8f06b4c79b58b3a06b0d46ff0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "5ed192d39e0282b052f9c8d05df279e5"
 }
 
 [deps]

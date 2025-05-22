@@ -1164,6 +1164,9 @@ shape = SubResource("ConcavePolygonShape3D_m71er")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/untitled_fbx/RootNode/Track/Decals/Graffiti (27)/Graffiti (27)_Graffiti6_0/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_0m0ch")
 
+[node name="Graffiti (28)" parent="Sketchfab_model/untitled_fbx/RootNode/Track/Decals" index="10"]
+transform = Transform3D(0.508406, 0.0923712, 0.856149, -0.06148, 0.995587, -0.0709067, -0.85892, -0.0165867, 0.511841, 837.714, 24.3707, 900.436)
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/untitled_fbx/RootNode/Track/Decals/Graffiti (28)/Graffiti (28)_GraffitiMenace_0" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/untitled_fbx/RootNode/Track/Decals/Graffiti (28)/Graffiti (28)_GraffitiMenace_0/StaticBody3D" index="0"]
@@ -1183,6 +1186,9 @@ shape = SubResource("ConcavePolygonShape3D_txla1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/untitled_fbx/RootNode/Track/Ramp (1)/Ramp (1)_concrete_0/StaticBody3D2" index="0"]
 shape = SubResource("ConcavePolygonShape3D_l267c")
+
+[node name="Ramp (2)" parent="Sketchfab_model/untitled_fbx/RootNode/Track" index="4"]
+transform = Transform3D(0.826093, 0.565698, 0.39574, -4.7978, -0.000527623, 0.197053, 1.1396, -0.412293, 0.542734, 974, 36.6, 747)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/untitled_fbx/RootNode/Track/Ramp (2)/Ramp (2)_Plywoodwall1_0" index="0"]
 
