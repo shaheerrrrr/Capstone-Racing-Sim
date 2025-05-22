@@ -1,20 +1,57 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=14 format=3 uid="uid://cs757hia37qho"]
-=======
-[gd_scene load_steps=17 format=3 uid="uid://bik5xvwjwnnpd"]
->>>>>>> Stashed changes
+[gd_scene load_steps=11 format=3 uid="uid://bik5xvwjwnnpd"]
 
-[ext_resource type="Script" path="res://Scripts/main.gd" id="1_vsrga"]
-[ext_resource type="PackedScene" uid="uid://4hqyrtbh7lx4" path="res://TestMap.tscn" id="2_gfnct"]
-[ext_resource type="Script" path="res://Scripts/timer.gd" id="2_wwcom"]
-[ext_resource type="Script" path="res://Scripts/speedometer.gd" id="3_u5m6h"]
-[ext_resource type="PackedScene" uid="uid://cyuhvpsm6nhwt" path="res://pause_screen.tscn" id="3_yjc56"]
-[ext_resource type="PackedScene" uid="uid://6nq43mymfein" path="res://Vehicle.tscn" id="4_5q17w"]
-[ext_resource type="PackedScene" uid="uid://dashodovitq7o" path="res://Assets/finish_line.glb" id="8_gh8wk"]
-[ext_resource type="Script" path="res://Scripts/finishline.gd" id="8_vcls1"]
-[ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="9_55y3f"]
-[ext_resource type="Script" path="res://hillphysics.gd" id="10_m6pbv"]
-[ext_resource type="Script" path="res://endofhill.gd" id="11_68ffp"]
+[ext_resource type="PackedScene" uid="uid://b0gn2snv0l801" path="res://TestMap.tscn" id="2_gfnct"]
+[ext_resource type="PackedScene" uid="uid://dq86uxaadbax4" path="res://Player.tscn" id="2_laxwu"]
+[ext_resource type="PackedScene" path="res://lap_coutner.tscn" id="5_i5q3w"]
+[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="6_dcwtx"]
+[ext_resource type="Script" path="res://timer.gd" id="6_gs6f5"]
+[ext_resource type="Script" path="res://countdown.gd" id="6_ifh1t"]
+
+[sub_resource type="GDScript" id="GDScript_6yvo5"]
+script/source = "extends Node3D
+
+var peer : ENetMultiplayerPeer
+@export var player_scene : PackedScene
+var hostnumpressed = 0
+var port = 8080
+
+func _on_host_pressed() -> void:
+	var peer = ENetMultiplayerPeer.new()
+	if (hostnumpressed == 0):
+		peer.create_server(port)
+		multiplayer.multiplayer_peer = peer
+		get_node(\"../IPLabel\").text = \"127.0.0.1\"
+		$CanvasLayer.hide()
+		hostnumpressed = 1
+
+
+func _on_join_pressed() -> void:
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_client(\"127.0.0.1\",1027)
+	multiplayer.multiplayer_peer = peer
+	$CanvasLayer.hide()
+	
+
+func exit_game(id):
+	multiplayer.peer_disconnected.connect(del_player)
+	del_player(id) 
+	hostnumpressed = 0
+
+
+func add_player(id = 1):
+	var player = player_scene.instantiate()
+	player.name = str(id)
+	call_deferred(\"add_child\", player)
+
+
+func del_player(id):
+	rpc(\"_del_player\", id)
+
+
+@rpc(\"any_peer\", \"call_local\")
+func _del_player(id):
+	get_node(str(id)).queue_free()
+"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yrsft"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -29,48 +66,45 @@ sky = SubResource("Sky_007pn")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="GDScript" id="GDScript_qvesi"]
-script/source = "extends Label
-
-var time_elapsed := 0.0
-var is_stopped := false
-
-@onready var player = $\"../Player\"
-func _process(delta: float) -> void:
-	time_elapsed += delta
-	if time_elapsed <= 3:
-		text = str(4 - time_elapsed).pad_decimals(0)
-	else:
-		#resume()
-		text = \"\"
-		queue_free()
-
-func reset() -> void:
-	time_elapsed = 0.0
-	is_stopped = false
-	#pause() 
-
-func stop() -> void:
-	is_stopped = true
-
-#
-#func resume():
-	#player.start()	
-"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_cm21y"]
-size = Vector3(54.2637, 1, 1)
-
-[node name="Node3D2" type="Node3D"]
-script = ExtResource("1_vsrga")
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_6yvo5")
 player_scene = ExtResource("2_laxwu")
 
-[node name="Vehicle" parent="." instance=ExtResource("4_5q17w")]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.91519, 0.9523, -104.348)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_24ss8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gfnct")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 6.353, 0.0560065, -27.1763)
+
+[node name="LapCoutner" parent="." instance=ExtResource("5_i5q3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79798, 0.81846, 0.209726)
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("2_laxwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0716639, 0.788011, -0.0492032)
+script = null
+
+[node name="timer" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.032
+offset_left = -51.5
+offset_top = 75.0
+offset_right = 51.5
+offset_bottom = 34.44
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "0.00"
+script = ExtResource("6_gs6f5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("3_yjc56")]
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("6_dcwtx")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -78,82 +112,22 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_group_ = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
-
-[node name="Borders" type="Node3D" parent="."]
-
-[node name="Map" type="Node3D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
-environment = SubResource("Environment_24ss8")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
-[node name="Sketchfab_Scene2" parent="Map" instance=ExtResource("2_gfnct")]
-transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="timer" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.032
-offset_left = 888.5
-offset_top = 75.0
-offset_right = 991.5
-offset_bottom = 142.72
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
-text = "0.00"
-script = ExtResource("2_wwcom")
-
-<<<<<<< Updated upstream
-[node name="speedometer" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1721.0
-offset_top = 984.0
-offset_right = 1880.0
-offset_bottom = 1040.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "0 MPH"
-script = ExtResource("3_u5m6h")
-
-[node name="coutndown" type="Label" parent="UI"]
-=======
-[node name="countdown" type="Label" parent="UI"]
->>>>>>> Stashed changes
-layout_mode = 1
+[node name="coutndown" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 796.5
-offset_top = 442.0
-offset_right = 1083.5
-offset_bottom = 598.0
+offset_left = -143.5
+offset_top = -78.0
+offset_right = 143.5
+offset_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Placeholder"
 horizontal_alignment = 1
-script = SubResource("GDScript_qvesi")
+script = ExtResource("6_ifh1t")
 
 [node name="speedometer" type="Label" parent="."]
 anchors_preset = 3
@@ -161,493 +135,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -170.0
-offset_top = -68.0
-offset_right = -11.0
-offset_bottom = -12.0
+offset_left = -159.0
+offset_top = -56.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
-script = ExtResource("3_u5m6h")
-
-[node name="Area3D" type="Area3D" parent="."]
-<<<<<<< Updated upstream
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.90141, -0.138113, 170.062)
-script = ExtResource("8_vcls1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, -2.74088, 0, 0)
-mesh = SubResource("BoxMesh_oq2qt")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74088, 0, 0)
-=======
-transform = Transform3D(-1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 16.7191, -0.138, 131.133)
-script = ExtResource("8_vcls1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 18.9879, 1.62886, 141.47)
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 1.6308, 141.434)
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Sketchfab_Scene" parent="Area3D" instance=ExtResource("8_gh8wk")]
-transform = Transform3D(3.75, 0, 0, 0, 3.75, 0, 0, 0, 3.75, 10.9714, -3.29165, 141.313)
-
-[node name="Checkpoints" type="Node3D" parent="."]
-
-[node name="Checkpoint1" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 6.79482e-07, 0, 2.25, 0, -6.79482e-07, 0, 2.25, -0.249687, -0.345008, -40.0168)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint1"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint1"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint2" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 6.79482e-07, 0, 2.25, 0, -6.79482e-07, 0, 2.25, -1.20726, -0.345, 6.79387)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint2"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint2"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint3" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 6.79482e-07, 0, 2.25, 0, -6.79482e-07, 0, 2.25, -1.20726, -0.345, 39.9044)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint3"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint3"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint4" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 6.79482e-07, 0, 2.25, 0, -6.79482e-07, 0, 2.25, -1.20726, -0.345, 92.9179)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint4"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint4"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint5" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 6.79482e-07, 0, 2.25, 0, -6.79482e-07, 0, 2.25, -1.20726, -0.345, 143.742)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint5"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint5"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint6" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 6.79482e-07, 0, 2.25, 0, -6.79482e-07, 0, 2.25, -1.20726, -0.345, 195.996)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint6"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint6"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint7" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, -27.5616, -0.239614, 241.453)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint7"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint7"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint8" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -86.4552, -0.345, 232.257)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint8"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint8"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint9" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -122.764, -0.345, 232.257)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint9"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint9"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint10" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -154.155, -0.345, 232.257)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint10"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint10"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint11" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -189.826, -0.345, 232.257)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint11"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint11"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint12" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -245.515, -0.345, 232.257)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint12"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint12"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint13" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -292.223, -0.345, 232.257)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint13"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint13"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint14" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -321.014, -0.345, 232.257)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint14"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint14"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint15" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, 1.59099, 0, 2.25, 0, -1.59099, 0, 1.59099, -356.285, -0.345, 224.981)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint15"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint15"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint16" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, -357.318, -0.345, 140.901)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint16"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint16"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint17" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -321.014, -0.345, 135.028)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint17"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint17"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint18" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -291.569, -0.345, 135.028)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint18"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint18"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint19" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -259.389, 0.0272026, 135.028)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint19"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint19"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint20" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -172.444, -19.043, 135.028)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint20"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint20"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint21" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -133.55, -19.043, 135.028)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint21"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint21"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint22" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, -93.0854, -19.043, 135.028)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint22"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint22"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint23" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, -52.4462, -19.043, 123.573)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint23"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint23"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint24" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -40.299, -19.2316, 89.5728)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint24"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint24"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint25" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -40.299, -19.2316, 60.5191)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint25"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint25"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint26" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, -19.7593, -19.2316, 40.5057)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint26"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint26"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint27" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, 3.81187, -19.2316, 27.9478)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint27"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint27"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint28" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, 32.837, -18.9945, 27.9478)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint28"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint28"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint29" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, 53.0621, -18.9945, 27.9478)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint29"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint29"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint30" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, 73.5855, -18.9945, 27.9478)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint30"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint30"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint31" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, 91.4251, -18.9945, 27.9478)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint31"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint31"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint32" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, 122.283, -17.3753, 27.9478)
-script = ExtResource("10_m6pbv")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint32"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint32"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint33" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 15, 0, 2.25, 0, -2.25, 0, -6.55671e-07, 186.551, 0.662774, 27.9478)
-script = ExtResource("11_68ffp")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint33"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint33"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint34" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(-9.83506e-08, 0, 2.25, 0, 2.25, 0, -2.25, 0, -9.83506e-08, 213.822, 0.662774, 27.9478)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint34"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint34"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint35" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, 241.725, 0.662774, 20.5094)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint35"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint35"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint36" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, 268.291, 0.662774, 0.847469)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint36"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint36"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint37" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, 305.302, 0.901625, -43.7862)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint37"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint37"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint38" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, 327.462, 0.883448, -77.6094)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint38"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint38"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint39" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, 327.462, 0.858835, -109.326)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint39"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint39"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint40" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, 1.59099, 0, 2.25, 0, -1.59099, 0, 1.59099, 316.925, 0.986969, -156.923)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint40"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint40"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint41" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, 1.59099, 0, 2.25, 0, -1.59099, 0, 1.59099, 253.463, 1.11887, -156.923)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint41"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint41"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint42" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, 1.59099, 0, 2.25, 0, -1.59099, 0, 1.59099, 176.668, 1.16583, -156.923)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint42"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint42"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint43" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, 1.59099, 0, 2.25, 0, -1.59099, 0, 1.59099, 83.1841, 0.979975, -156.923)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint43"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint43"]
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint44" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, 1.59099, 14.3089, 3.07734, -156.923)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint44"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint44"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.908092, 0)
-shape = SubResource("BoxShape3D_cm21y")
-
-[node name="Checkpoint45" type="Area3D" parent="Checkpoints"]
-transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -8.51635, -0.295331, -121.224)
-script = ExtResource("9_55y3f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoints/Checkpoint45"]
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Checkpoint45"]
->>>>>>> Stashed changes
-shape = SubResource("BoxShape3D_cm21y")
