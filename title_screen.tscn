@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6rclpkwpvtsc"]
+[gd_scene load_steps=4 format=3 uid="uid://b6rclpkwpvtsc"]
 
 [ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="1_3rf1i"]
 [ext_resource type="Script" path="res://title_screen.gd" id="1_qhwdp"]
+[ext_resource type="Texture2D" uid="uid://bcg8gvv7bkqf7" path="res://Assets/Title_Image.png" id="3_tb56y"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -12,6 +13,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_3rf1i")
 script = ExtResource("1_qhwdp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1082.0
+texture = ExtResource("3_tb56y")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1

@@ -38,6 +38,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
 default_font = ExtResource("1_nu57e")
+Button/colors/font_color = Color(0.862745, 0.87451, 0.933333, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_rkdnr")
 Button/styles/normal = SubResource("StyleBoxFlat_fsmhf")
 HBoxContainer/styles/normal = SubResource("StyleBoxFlat_xkh0p")

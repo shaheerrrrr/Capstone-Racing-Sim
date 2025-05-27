@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cd8b6w6yuidqy"]
 
-[ext_resource type="PackedScene" path="res://DessertTrack.tscn" id="1_up1t8"]
+[ext_resource type="PackedScene" uid="uid://dtmo5dxguumuv" path="res://DessertTrack.tscn" id="1_up1t8"]
 [ext_resource type="PackedScene" uid="uid://d14he15igxsuq" path="res://Vehicle.tscn" id="2_4vb0v"]
 [ext_resource type="PackedScene" uid="uid://b811p56v6jekm" path="res://pause_screen.tscn" id="3_jmxii"]
 [ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="3_l8gsg"]

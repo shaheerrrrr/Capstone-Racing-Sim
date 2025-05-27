@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3phfelkim0s5"]
+[gd_scene load_steps=13 format=3 uid="uid://c3phfelkim0s5"]
 
-[ext_resource type="PackedScene" path="res://RainbowRoadd.tscn" id="1_l5jxy"]
+[ext_resource type="PackedScene" uid="uid://c8cb7wirrcevk" path="res://RainbowRoadd.tscn" id="1_l5jxy"]
 [ext_resource type="PackedScene" uid="uid://d14he15igxsuq" path="res://Vehicle.tscn" id="2_ort0o"]
 [ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="2_w25th"]
 [ext_resource type="PackedScene" uid="uid://b811p56v6jekm" path="res://pause_screen.tscn" id="3_vw8sl"]
@@ -26,12 +26,6 @@ background_mode = 2
 sky = SubResource("Sky_oyr3h")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_7qfr4"]
-size = Vector3(1500, 20, 2500)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_du7ox"]
-size = Vector3(1500, 20, 2500)
 
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.0253, 0)
@@ -125,15 +119,6 @@ environment = SubResource("Environment_pgv32")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 297.38, 0)
 shadow_enabled = true
-
-[node name="RespawnBox" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 107.189, -122.222)
-mesh = SubResource("BoxMesh_7qfr4")
-
-[node name="RespawnStatic" type="Area3D" parent="RespawnBox"]
-
-[node name="RespawnCollision" type="CollisionShape3D" parent="RespawnBox/RespawnStatic"]
-shape = SubResource("BoxShape3D_du7ox")
 
 [node name="Vehicle" parent="." instance=ExtResource("2_ort0o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.232, 467.481, 0)

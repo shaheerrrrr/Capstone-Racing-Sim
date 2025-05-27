@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://gmh5gqb6fsql"]
+[gd_scene load_steps=4 format=3 uid="uid://gmh5gqb6fsql"]
 
 [ext_resource type="Script" path="res://MapSelect.gd" id="1_1mi5l"]
 [ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="1_7byhe"]
+[ext_resource type="Texture2D" uid="uid://bcg8gvv7bkqf7" path="res://Assets/Title_Image.png" id="3_3wygb"]
 
 [node name="MapSelect" type="Control"]
 layout_mode = 3
@@ -16,6 +17,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_7byhe")
 script = ExtResource("1_1mi5l")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1913.0
+offset_bottom = 1070.0
+texture = ExtResource("3_3wygb")
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 1
