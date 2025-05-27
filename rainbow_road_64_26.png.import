@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cpvgis35d21ij"
+path.s3tc="res://.godot/imported/rainbow_road_64_26.png-d8464f0c18a067456912780cc261557f.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "880ab580730429a8244a3fa222a89a16"
+}
+
+[deps]
+
+source_file="res://rainbow_road_64_26.png"
+dest_files=["res://.godot/imported/rainbow_road_64_26.png-d8464f0c18a067456912780cc261557f.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

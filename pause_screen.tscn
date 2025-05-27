@@ -1,21 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyuhvpsm6nhwt"]
+[gd_scene load_steps=7 format=3 uid="uid://devu25awtav2b"]
 
-[ext_resource type="Script" path="res://Scripts/pause_screen.gd" id="1_wa0e2"]
-
-[sub_resource type="Shader" id="Shader_tyhqg"]
-code = "shader_type canvas_item;
-uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
-
-uniform float lod: hint_range(0.0, 5) = 0.0;
-
-void fragment(){
-	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
-	COLOR = color;
-}
-"
+[ext_resource type="Script" path="res://pause_screen.gd" id="1_cuenl"]
+[ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_m76nj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dcqc8"]
-shader = SubResource("Shader_tyhqg")
+shader = ExtResource("2_m76nj")
 shader_parameter/lod = 0.0
 
 [sub_resource type="Animation" id="Animation_ahnbe"]
@@ -87,14 +76,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_wa0e2")
+script = ExtResource("1_cuenl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_dcqc8")
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.145
+offset_bottom = 923.4
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -109,23 +99,46 @@ offset_bottom = 812.0
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 auto_translate_mode = 1
 layout_mode = 2
+theme_override_constants/separation = 200
 
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Resume"
+theme_override_font_sizes/font_size = 45
+text = "▶"
 
 [node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Restart"
+theme_override_font_sizes/font_size = 45
+text = "⟳"
 
 [node name="ToTitle" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Quit to Title"
+theme_override_font_sizes/font_size = 45
+text = "✖"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_b24pb")
 }
+
+[node name="Resize2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 809.0
+offset_right = 1239.0
+offset_bottom = 878.0
+
+[node name="Resize1" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.351
+anchor_top = 0.249
+anchor_right = 0.647
+anchor_bottom = 0.31
+offset_left = -0.920044
+offset_top = 0.0799866
+offset_right = 0.76001
+offset_bottom = 0.200012
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

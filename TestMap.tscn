@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://4hqyrtbh7lx4"]
 
 [ext_resource type="PackedScene" uid="uid://k4s3ym6lpp7t" path="res://Assets/tracks/race_track__low_poly.glb" id="1_yt22e"]
-[ext_resource type="Texture2D" uid="uid://bx21adk0yfadx" path="res://grass03.png" id="2_jsaf6"]
-[ext_resource type="Texture2D" uid="uid://d0vbcbjhwf65k" path="res://asphalt_road_2_0.jpg" id="2_qpglk"]
+[ext_resource type="Texture2D" uid="uid://c3hyconpnddfc" path="res://Textures/grass03.png" id="2_jsaf6"]
+[ext_resource type="Texture2D" uid="uid://tp58pprhac06" path="res://Textures/asphalt_road_2_0.jpg" id="2_qpglk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_un1yw"]
 albedo_texture = ExtResource("2_qpglk")
