@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvsxymkt8atgh"]
+[gd_scene load_steps=15 format=3 uid="uid://c3phfelkim0s5"]
 
-[ext_resource type="PackedScene" uid="uid://c8cb7wirrcevk" path="res://RainbowRoadd.tscn" id="1_l5jxy"]
-[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="2_ort0o"]
-[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="3_vw8sl"]
+[ext_resource type="PackedScene" path="res://RainbowRoadd.tscn" id="1_l5jxy"]
+[ext_resource type="PackedScene" uid="uid://d14he15igxsuq" path="res://Vehicle.tscn" id="2_ort0o"]
+[ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="2_w25th"]
+[ext_resource type="PackedScene" uid="uid://b811p56v6jekm" path="res://pause_screen.tscn" id="3_vw8sl"]
 [ext_resource type="Script" path="res://Scripts/speedometer.gd" id="4_ih6s3"]
 [ext_resource type="Script" path="res://Scripts/timer.gd" id="5_u43mh"]
 [ext_resource type="Script" path="res://Scripts/countdown.gd" id="6_4uutf"]
@@ -26,11 +27,14 @@ sky = SubResource("Sky_oyr3h")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_7qfr4"]
+size = Vector3(1500, 20, 2500)
 
-[node name="Vehicle" parent="." instance=ExtResource("2_ort0o")]
-transform = Transform3D(0.999707, 0, -0.024188, 0, 1, 0, 0.024188, 0, 0.999707, 26.3806, 178.147, -0.552338)
-center_of_mass = Vector3(0, -0.02, -0.25)
+[sub_resource type="BoxShape3D" id="BoxShape3D_du7ox"]
+size = Vector3(1500, 20, 2500)
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.0253, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -52,6 +56,7 @@ offset_left = -159.0
 offset_top = -56.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("2_w25th")
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 script = ExtResource("4_ih6s3")
@@ -61,6 +66,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("2_w25th")
 
 [node name="timer" type="Label" parent="UI"]
 layout_mode = 1
@@ -105,17 +111,30 @@ transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 18.9879, 1.62886, 141.47)
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 1.6308, 141.434)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 398.137, 141.434)
 shape = SubResource("BoxShape3D_x06ty")
 
 [node name="Map" type="Node3D" parent="."]
 
 [node name="Sketchfab_Scene" parent="Map" instance=ExtResource("1_l5jxy")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 19.7993, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 317.179, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
 environment = SubResource("Environment_pgv32")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 297.38, 0)
 shadow_enabled = true
+
+[node name="RespawnBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 107.189, -122.222)
+mesh = SubResource("BoxMesh_7qfr4")
+
+[node name="RespawnStatic" type="Area3D" parent="RespawnBox"]
+
+[node name="RespawnCollision" type="CollisionShape3D" parent="RespawnBox/RespawnStatic"]
+shape = SubResource("BoxShape3D_du7ox")
+
+[node name="Vehicle" parent="." instance=ExtResource("2_ort0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.232, 467.481, 0)
+center_of_mass = Vector3(0, -0.02, -0.25)

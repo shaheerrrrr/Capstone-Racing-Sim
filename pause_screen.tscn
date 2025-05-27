@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://devu25awtav2b"]
+[gd_scene load_steps=8 format=3 uid="uid://b811p56v6jekm"]
 
+[ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="1_7a51t"]
 [ext_resource type="Script" path="res://pause_screen.gd" id="1_cuenl"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_m76nj"]
 
@@ -76,6 +77,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_7a51t")
 script = ExtResource("1_cuenl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -113,8 +115,8 @@ text = "⟳"
 
 [node name="ToTitle" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "✖"
+theme_override_font_sizes/font_size = 65
+text = "X"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

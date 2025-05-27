@@ -79,6 +79,8 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("is_drifting"):
 			_drift()
 			_update_drift_trails(delta)
+		if global_position.y > 60 and global_position.y < 100:
+			_respawn()
 		else:
 			_stop_drift()
 			_clear_drift_trails()
@@ -210,3 +212,9 @@ func setCheckpoint(i: int) -> void:
 		print(i-1)
 	else:
 		push_error("Checkpoint index out of bounds: " + str(i))
+
+func _respawn() -> void:
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	global_position = Vector3(26.232,462,5)
+	global_rotation_degrees = Vector3(0,0,0)

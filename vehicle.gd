@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	if time_elapsed > 3:
 		start = true
 	speed = linear_velocity.length()
-	
+
 func _drift():
 	backLeft_wheel.wheel_friction_slip = backwheeldrift
 	backRight_wheel.wheel_friction_slip = backwheeldrift

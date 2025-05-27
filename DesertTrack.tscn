@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://com2wo41omabk"]
+[gd_scene load_steps=14 format=3 uid="uid://cd8b6w6yuidqy"]
 
-[ext_resource type="PackedScene" uid="uid://dtmo5dxguumuv" path="res://DessertTrack.tscn" id="1_up1t8"]
-[ext_resource type="PackedScene" uid="uid://cua75myj3xuu2" path="res://Vehicle.tscn" id="2_4vb0v"]
-[ext_resource type="PackedScene" uid="uid://devu25awtav2b" path="res://pause_screen.tscn" id="3_jmxii"]
+[ext_resource type="PackedScene" path="res://DessertTrack.tscn" id="1_up1t8"]
+[ext_resource type="PackedScene" uid="uid://d14he15igxsuq" path="res://Vehicle.tscn" id="2_4vb0v"]
+[ext_resource type="PackedScene" uid="uid://b811p56v6jekm" path="res://pause_screen.tscn" id="3_jmxii"]
+[ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="3_l8gsg"]
 [ext_resource type="Script" path="res://Scripts/speedometer.gd" id="4_nn60i"]
 [ext_resource type="Script" path="res://Scripts/timer.gd" id="5_3yha0"]
 [ext_resource type="Script" path="res://Scripts/countdown.gd" id="6_82ckw"]
@@ -53,6 +54,7 @@ offset_left = -159.0
 offset_top = -56.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("3_l8gsg")
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 script = ExtResource("4_nn60i")
@@ -62,6 +64,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("3_l8gsg")
 
 [node name="timer" type="Label" parent="UI"]
 layout_mode = 1
