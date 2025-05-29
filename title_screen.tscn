@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://nd7gtk87yojt"]
+[gd_scene load_steps=4 format=3 uid="uid://b6rclpkwpvtsc"]
 
-[ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_lpi0n"]
+[ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="1_3rf1i"]
+[ext_resource type="Script" path="res://title_screen.gd" id="1_qhwdp"]
+[ext_resource type="Texture2D" uid="uid://bcg8gvv7bkqf7" path="res://Assets/Title_Image.png" id="3_tb56y"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -9,34 +11,63 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lpi0n")
+theme = ExtResource("1_3rf1i")
+script = ExtResource("1_qhwdp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1082.0
+texture = ExtResource("3_tb56y")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -237.5
-offset_top = 350.0
-offset_right = 237.5
-offset_bottom = 529.0
+anchors_preset = -1
+anchor_left = 0.376
+anchor_top = 0.324
+anchor_right = 0.624
+anchor_bottom = 0.49
+offset_left = 0.579956
+offset_top = 0.0799866
+offset_right = -0.580078
+offset_bottom = -0.200012
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
 text = "START"
+metadata/_edit_use_anchors_ = true
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -237.0
-offset_top = -430.0
-offset_right = 237.0
-offset_bottom = -252.0
+anchors_preset = -1
+anchor_left = 0.377
+anchor_top = 0.602
+anchor_right = 0.623
+anchor_bottom = 0.767
+offset_left = -0.840027
+offset_top = -0.160034
+offset_right = 0.839966
+offset_bottom = -0.360046
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 50
 text = "QUIT"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.286
+anchor_top = 0.11
+anchor_right = 0.714
+anchor_bottom = 0.25
+offset_left = 0.380005
+offset_top = 0.199989
+offset_right = -0.380127
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 100
+text = "Racing Simulator"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -1,0 +1,49 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://b52ff58xhbbme"]
+
+[ext_resource type="FontFile" uid="uid://bu4m718cyrpw7" path="res://Textures/MarioKartWiiPlacement-Regular.ttf" id="1_nu57e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkdnr"]
+bg_color = Color(0.129927, 0.140604, 0.221485, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.863859, 0.874613, 0.933242, 1)
+border_blend = true
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0.145098, 0.145098, 0.145098, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsmhf"]
+bg_color = Color(0.219892, 0.234306, 0.351882, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.863859, 0.874613, 0.933242, 1)
+border_blend = true
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0.145098, 0.145098, 0.145098, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkh0p"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qcwcv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+default_font = ExtResource("1_nu57e")
+Button/colors/font_color = Color(0.862745, 0.87451, 0.933333, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_rkdnr")
+Button/styles/normal = SubResource("StyleBoxFlat_fsmhf")
+HBoxContainer/styles/normal = SubResource("StyleBoxFlat_xkh0p")
+Label/colors/font_color = Color(0.862745, 0.87451, 0.933333, 1)
+LineEdit/colors/caret_color = Color(0.862745, 0.87451, 0.933333, 1)
+LineEdit/colors/font_color = Color(0.862745, 0.87451, 0.933333, 1)
+LineEdit/colors/font_selected_color = Color(0.862745, 0.87451, 0.933333, 1)
+VBoxContainer/styles/normal = SubResource("StyleBoxFlat_qcwcv")

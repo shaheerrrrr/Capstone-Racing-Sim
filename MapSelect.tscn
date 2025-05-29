@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://8pxthk0m40qn"]
+[gd_scene load_steps=4 format=3 uid="uid://gmh5gqb6fsql"]
 
-[ext_resource type="Script" path="res://Scripts/map_select.gd" id="1_4ih2g"]
+[ext_resource type="Script" path="res://MapSelect.gd" id="1_1mi5l"]
+[ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="1_7byhe"]
+[ext_resource type="Texture2D" uid="uid://bcg8gvv7bkqf7" path="res://Assets/Title_Image.png" id="3_3wygb"]
 
 [node name="MapSelect" type="Control"]
 layout_mode = 3
@@ -13,29 +15,14 @@ offset_right = 5.0
 offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4ih2g")
+theme = ExtResource("1_7byhe")
+script = ExtResource("1_1mi5l")
 
-[node name="Map1" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -237.5
-offset_top = 150.0
-offset_right = 237.5
-offset_bottom = 329.0
-grow_horizontal = 2
-text = "Map 1
-"
-
-[node name="Map2" type="Button" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 1055.0
-offset_top = 598.0
-offset_right = 1530.0
-offset_bottom = 777.0
-text = "Map 2
-"
+offset_right = 1913.0
+offset_bottom = 1070.0
+texture = ExtResource("3_3wygb")
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 1
@@ -50,9 +37,63 @@ offset_right = 237.0
 offset_bottom = -223.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 50
 text = "Back
 "
 
-[connection signal="pressed" from="Map1" to="." method="_on_Map1_button_pressed"]
-[connection signal="pressed" from="Map2" to="." method="onMap2Pressed"]
-[connection signal="pressed" from="Back" to="." method="_on_map_2_pressed"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -514.0
+offset_top = 173.0
+offset_right = 506.0
+offset_bottom = 699.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Map1" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Track
+Uno"
+
+[node name="Map3" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Track
+Tres"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Map2" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Track
+Dos"
+
+[node name="Map4" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Track
+Cuatro"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Map1" to="." method="_on_map_1_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Map3" to="." method="_on_map_3_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/Map2" to="." method="_on_map_2_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/Map4" to="." method="_on_map_4_pressed"]

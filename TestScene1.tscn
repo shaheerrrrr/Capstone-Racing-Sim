@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bncj6afx4j4bb"]
+[gd_scene load_steps=15 format=3 uid="uid://c4246l2iveuh2"]
 
 [ext_resource type="PackedScene" uid="uid://b7utbcceih2l1" path="res://Wamp Wamp.tscn" id="1_o6ypu"]
-[ext_resource type="PackedScene" uid="uid://6nq43mymfein" path="res://Vehicle.tscn" id="2_rtiqu"]
+[ext_resource type="PackedScene" uid="uid://d14he15igxsuq" path="res://Vehicle.tscn" id="2_rtiqu"]
 [ext_resource type="Script" path="res://Scripts/timer.gd" id="3_fues2"]
 [ext_resource type="Script" path="res://Scripts/speedometer.gd" id="4_4hfo3"]
+[ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="4_a5plp"]
 [ext_resource type="Script" path="res://Scripts/countdown.gd" id="5_orono"]
-[ext_resource type="PackedScene" uid="uid://cyuhvpsm6nhwt" path="res://pause_screen.tscn" id="6_i37wo"]
+[ext_resource type="PackedScene" uid="uid://b811p56v6jekm" path="res://pause_screen.tscn" id="6_i37wo"]
 [ext_resource type="Script" path="res://Scripts/finishline.gd" id="7_godbw"]
 [ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="8_sv85y"]
 
@@ -44,9 +45,6 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_group_ = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
-
 [node name="Borders" type="Node3D" parent="."]
 
 [node name="speedometer" type="Label" parent="."]
@@ -59,6 +57,7 @@ offset_left = -159.0
 offset_top = -55.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("4_a5plp")
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 vertical_alignment = 2
@@ -69,6 +68,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("4_a5plp")
 
 [node name="timer" type="Label" parent="UI"]
 layout_mode = 1

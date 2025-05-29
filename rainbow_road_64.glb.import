@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://q16auws3rmfk"
-path="res://.godot/imported/sydney_sprint.glb-50625eb07f57872a1ee7e354aa3d2323.scn"
+uid="uid://da2ls4mlp0wdq"
+path="res://.godot/imported/rainbow_road_64.glb-0db4348f4c728545f40b2ee48a549c40.scn"
 
 [deps]
 
-source_file="res://sydney_sprint.glb"
-dest_files=["res://.godot/imported/sydney_sprint.glb-50625eb07f57872a1ee7e354aa3d2323.scn"]
+source_file="res://rainbow_road_64.glb"
+dest_files=["res://.godot/imported/rainbow_road_64.glb-0db4348f4c728545f40b2ee48a549c40.scn"]
 
 [params]
 

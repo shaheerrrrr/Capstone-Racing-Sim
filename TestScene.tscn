@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://bik5xvwjwnnpd"]
+[gd_scene load_steps=19 format=3 uid="uid://byjic5701s8gd"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_vsrga"]
 [ext_resource type="PackedScene" uid="uid://4hqyrtbh7lx4" path="res://TestMap.tscn" id="2_gfnct"]
 [ext_resource type="Script" path="res://Scripts/timer.gd" id="2_wwcom"]
 [ext_resource type="Script" path="res://Scripts/speedometer.gd" id="3_u5m6h"]
-[ext_resource type="PackedScene" uid="uid://cyuhvpsm6nhwt" path="res://pause_screen.tscn" id="3_yjc56"]
-[ext_resource type="PackedScene" uid="uid://6nq43mymfein" path="res://Vehicle.tscn" id="4_5q17w"]
+[ext_resource type="PackedScene" uid="uid://b811p56v6jekm" path="res://pause_screen.tscn" id="3_yjc56"]
+[ext_resource type="PackedScene" uid="uid://d14he15igxsuq" path="res://Vehicle.tscn" id="4_5q17w"]
 [ext_resource type="PackedScene" uid="uid://bvp07nbb58rkr" path="res://Assets/bush.glb" id="5_7gcc0"]
+[ext_resource type="Theme" uid="uid://b52ff58xhbbme" path="res://Scripts/theme.tres" id="6_5fr7a"]
 [ext_resource type="PackedScene" uid="uid://dashodovitq7o" path="res://Assets/finish_line.glb" id="8_gh8wk"]
 [ext_resource type="Script" path="res://Scripts/finishline.gd" id="8_vcls1"]
 [ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="9_55y3f"]
@@ -17,12 +18,12 @@
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_007pn"]
+[sub_resource type="Sky" id="Sky_ylbtt"]
 sky_material = SubResource("ProceduralSkyMaterial_yrsft")
 
 [sub_resource type="Environment" id="Environment_24ss8"]
 background_mode = 2
-sky = SubResource("Sky_007pn")
+sky = SubResource("Sky_ylbtt")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -75,9 +76,7 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_group_ = true
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
+metadata/_edit_use_anchors_ = true
 
 [node name="Borders" type="Node3D" parent="."]
 
@@ -128,6 +127,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("6_5fr7a")
 
 [node name="timer" type="Label" parent="UI"]
 layout_mode = 1
@@ -175,6 +175,7 @@ offset_right = -11.0
 offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("6_5fr7a")
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
 script = ExtResource("3_u5m6h")
