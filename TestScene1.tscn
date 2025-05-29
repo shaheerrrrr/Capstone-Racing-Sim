@@ -56,11 +56,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -159.0
-offset_top = -56.0
+offset_top = -55.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "0 MPH"
+vertical_alignment = 2
 script = ExtResource("4_4hfo3")
 
 [node name="UI" type="Control" parent="."]
@@ -75,10 +76,10 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.032
-offset_left = 888.5
-offset_top = 75.0
-offset_right = 991.5
-offset_bottom = 142.72
+offset_left = 1201.0
+offset_top = 142.0
+offset_right = 1304.0
+offset_bottom = 209.72
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
 text = "0.00"
@@ -91,16 +92,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 796.5
-offset_top = 442.0
-offset_right = 1083.5
-offset_bottom = 598.0
+offset_left = 1128.0
+offset_top = 642.0
+offset_right = 1415.0
+offset_bottom = 798.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "3
 "
 horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("5_orono")
 
 [node name="Map" type="Node3D" parent="."]
