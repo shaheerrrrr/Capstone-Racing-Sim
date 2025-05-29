@@ -30,6 +30,10 @@ glow_enabled = true
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.0253, 0)
 
+[node name="Vehicle" parent="." instance=ExtResource("2_ort0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.232, 467.481, 0)
+center_of_mass = Vector3(0, -0.02, -0.25)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("3_vw8sl")]
@@ -101,11 +105,11 @@ transform = Transform3D(-0.75, 0, -1.13247e-07, 0, 0.75, 0, 1.13247e-07, 0, -0.7
 script = ExtResource("7_8rfse")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 18.9879, 1.62886, 141.47)
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 6.85831, 432.6, 151.284)
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 398.137, 141.434)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9994, 432.567, 152.484)
 shape = SubResource("BoxShape3D_x06ty")
 
 [node name="Map" type="Node3D" parent="."]
@@ -119,7 +123,3 @@ environment = SubResource("Environment_pgv32")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 297.38, 0)
 shadow_enabled = true
-
-[node name="Vehicle" parent="." instance=ExtResource("2_ort0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.232, 467.481, 0)
-center_of_mass = Vector3(0, -0.02, -0.25)
